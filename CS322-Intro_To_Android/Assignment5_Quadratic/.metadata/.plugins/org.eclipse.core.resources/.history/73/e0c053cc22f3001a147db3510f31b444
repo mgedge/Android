@@ -1,0 +1,24 @@
+/************************************************************************
+ *                                                                      *    	
+ * CSCI 322/522  			  Assignment 2               		 FA2020 *
+ *                                                            		    * 
+ * 	Class Name: Invoice.java											*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *   Due Date: 4 September 2020											*
+ *   																	*
+ *    Purpose: This java class handles the construction and management  *
+ *    		   each invoice object. Each object has a partNumber,		*
+ *    		   partDescription, quantity, and price. Additionally, this *
+ *    		   class manages the calculation invoice amount(price*quant)*
+ *																		*    
+ * *********************************************************************/
+
+public class TipApp {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

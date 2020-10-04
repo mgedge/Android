@@ -1,0 +1,109 @@
+import java.util.Scanner;
+
+/************************************************************************
+ *                                                                      *    	
+ * CSCI 322/522  			  Assignment 3               		 FA2020 *
+ *                                                            		    * 
+ * 	Class Name: TipApp.java												*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *   Due Date: 11 September 2020										*
+ *   																	*
+ *    Purpose: This java class handles the construction and management  *
+ *    		   each invoice object. Each object has a partNumber,		*
+ *    		   partDescription, quantity, and price. Additionally, this *
+ *    		   class manages the calculation invoice amount(price*quant)*
+ *																		*    
+ * *********************************************************************/
+
+public class TipApp extends TipCalculator{
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		TipApp app = new TipApp(); 
+		
+		TipCalculator newTip = new TipCalculator();
+		app.calculateTips(newTip);
+
+	}
+	
+	public void calculateTips(TipCalculator tip) {
+		boolean valid = false;
+		boolean bContinue = true; 
+		double bill = 0;
+		int percentage = 0;
+		int partySize = 0;
+		char cont;
+		Scanner input = new Scanner(System.in);
+		
+		//Collect input
+		while(bContinue) {
+			//Prompt for bill amount, check for invalid		
+			while(!valid) {
+				System.out.print("Enter the bill amount: ");
+				bill = input.nextDouble();
+				if(bill >= 0)
+					valid = true;
+				else
+					System.out.println("Please enter a valid bill amount.\n");
+			}
+			
+			tip.setBillAmount(bill);
+			valid = false;
+			
+			//Prompt for tip
+			while(!valid) {
+				System.out.print("Enter the desired tip percentage (20 equals 20%): ");
+				percentage = input.nextInt();
+				if(percentage >= 0)
+					valid = true;
+				else
+					System.out.println("Please enter a valid tip percentage.\n");
+			}
+			
+			tip.setPercentageTip(percentage);
+			valid = false;
+			
+			//Prompt for partySize
+			while(!valid) {
+				System.out.print("Enter the size of your party: ");
+				partySize = input.nextInt();
+				if(partySize > 0)
+					valid = true;
+				else
+					System.out.println("Please enter a valid party size.\n");
+			}
+			
+			tip.setPartySize(partySize);
+			valid = false;
+			
+			//Print the result
+			System.out.println("*** Your Bill ***");
+			System.out.println("Bill Amount: $" + tip.getBillAmount());
+			
+			System.out.println("Tip Percentage: " + tip.getPercentageTip() + "%");
+			
+			System.out.println("Party Size: " + tip.getPartySize() + "\n");
+			
+			System.out.println("Total Bill (with Tip): $" + tip.getTotalBill());
+			System.out.println("Share for Each Individual: $" + tip.getIndividualShare());
+			
+			
+			//Prompt for repeat
+			while(!valid) {
+				System.out.print("Another bill? (y/n): ");
+				cont = input.next().charAt(0);
+				
+				if(cont == 'Y' || cont == 'y') 
+					valid = true;
+				else if(cont == 'N' || cont == 'n')
+					bContinue = false;
+				else
+					System.out.println("Please enter a valid response.\n");
+			}
+			
+			valid = false;
+		}
+	}
+
+}

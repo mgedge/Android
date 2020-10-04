@@ -1,0 +1,75 @@
+/************************************************************************
+ *                                                                      *    	
+ * CSCI 322/522  			  Assignment 3               		 FA2020 *
+ *                                                            		    * 
+ * 	Class Name: TipCalculator.java										*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *   Due Date: 11 September 2020										*
+ *   																	*
+ *    Purpose: This java class runs the calculator part of the app.     *
+ *    		   This class contains the gets and sets for the three vars *
+ *    		   as well as two methods to calculate the total bill and   *
+ *    		   the split individual bill *
+ *																		*    
+ * *********************************************************************/
+
+public class TipCalculator {
+	private double billAmount = 0;
+	private int percentageTip = 20;
+	private int partySize = 1;
+	
+	//Constructor for variables
+	public TipCalculator(double billAmount, int percentageTip, int partySize) {
+		this.billAmount = billAmount;
+		this.percentageTip = percentageTip;
+		this.partySize = partySize;
+	}
+	
+	public TipCalculator() {
+		this(0,20,1);
+	}
+	
+	//Sets - set the object variable to caller value
+	public void setBillAmount(double billAmount) {
+		this.billAmount = billAmount;
+	}
+	
+	public void setPercentageTip(int percentageTip) {
+		this.percentageTip = percentageTip;
+	}
+	
+	public void setPartySize(int partySize) {
+		this.partySize = partySize;
+	}
+	
+	//Gets - get the object variable
+	public double getBillAmount() {
+		return billAmount;
+	}
+	
+	public int getPercentageTip() {
+		return percentageTip;
+	}
+	
+	public int getPartySize() {
+		return partySize;
+	}
+	
+	//Get the total bill
+	public double getTotalBill() {
+		double percent = (double)percentageTip / 100;
+		percent += 1;
+		double total = billAmount * percent;
+		return total;
+	}
+	
+	//Get the individual bill
+	public double getIndividualShare() {
+		double percent = (double)percentageTip / 100;
+		double total = (double)Math.round(billAmount * percent * 100) / 100;
+		total += billAmount;
+		total = (double)Math.round(total / partySize * 100) / 100;
+		return total;
+	}
+} //End of class

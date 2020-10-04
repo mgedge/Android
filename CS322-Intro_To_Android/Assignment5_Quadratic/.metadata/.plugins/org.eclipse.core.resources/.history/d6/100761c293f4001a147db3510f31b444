@@ -1,0 +1,155 @@
+import java.util.Scanner;
+
+/************************************************************************
+ *                                                                      *    	
+ * CSCI 322/522  			  Assignment 3               		 FA2020 *
+ *                                                            		    * 
+ * 	Class Name: TipApp.java												*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *   Due Date: 11 September 2020										*
+ *   																	*
+ *    Purpose: This java class handles the construction and management  *
+ *    		   each invoice object. Each object has a partNumber,		*
+ *    		   partDescription, quantity, and price. Additionally, this *
+ *    		   class manages the calculation invoice amount(price*quant)*
+ *																		*    
+ * *********************************************************************/
+
+public class TipApp extends TipCalculator{
+
+	public static void main(String[] args) {
+		//Create an app object
+		TipApp app = new TipApp(); 
+		
+		//Create a tip object and pass the tip through the app
+		TipCalculator newTip = new TipCalculator();
+		app.calculateTips(newTip);
+	}
+	
+	public void calculateTips(TipCalculator tip) {
+		boolean valid = false;
+		boolean bContinue = true; 
+		double bill = 0;
+		int percentage = 0;
+		int partySize = 0;
+		char cont;
+		Scanner input = new Scanner(System.in);
+		
+		//Collect input
+		while(bContinue) {
+			//Prompt for bill amount, check for invalid		
+			while(!valid) {
+				System.out.print("Enter the bill amount: ");
+				
+				if(input.hasNextDouble()) {
+					//Bill can't be negative
+					if(bill >= 0) {
+						valid = true;
+						tip.setBillAmount(bill);
+					}
+					else
+						System.out.println("Please enter a valid bill amount.\n");
+				}
+				else {
+					System.out.println("Please enter a valid bill amount.\n");
+					input.next();
+				}
+			}
+			
+			valid = false;
+			
+			//Prompt for tip
+			while(!valid) {
+				System.out.print("Enter the desired tip percentage (20 equals 20%): ");
+				
+				//Percentage is entered as integer converted to double
+				try{
+					percentage = input.nextInt();
+				}
+				catch(Exception e) {
+					//Do nothing
+				}
+				
+				//Percentage must be positive
+				if(percentage >= 0)
+					valid = true;
+				else
+					System.out.println("Please enter a valid tip percentage.\n");
+			}
+			
+			tip.setPercentageTip(percentage);
+			valid = false;
+			
+			//Prompt for partySize
+			while(!valid) {
+				System.out.print("Enter the size of your party: ");
+				
+				//Party size is an integer
+				try{
+					partySize = input.nextInt();
+				}
+				catch(Exception e){
+					//Do nothing
+				}
+				
+				//Party must be greater than 0
+				if(partySize > 0)
+					valid = true;
+				else
+					System.out.println("Please enter a valid party size.\n");
+			}
+			
+			tip.setPartySize(partySize);
+			valid = false;
+			
+			//Print the result
+			System.out.println("\n*** Your Bill ***");
+			System.out.println("Bill Amount: $" + tip.getBillAmount());
+			
+			System.out.println("Tip Percentage: " + tip.getPercentageTip() + "%");
+			
+			System.out.println("Party Size: " + tip.getPartySize() + "\n");
+			
+			System.out.println("Total Bill (with Tip): $" + tip.getTotalBill());
+			System.out.println("Share for Each Individual: $" + tip.getIndividualShare());
+			
+			
+			//Prompt for repeat
+			while(!valid) {
+				System.out.print("\nAnother bill? (y/n): ");
+				cont = input.next().charAt(0);
+				
+				//If the response starts with upper or lower case Y
+				if(cont == 'Y' || cont == 'y') {
+					//End the exit prompt
+					valid = true;
+				}
+				else if(cont == 'N' || cont == 'n') {
+					//End the program loop
+					bContinue = false;
+					valid = true;
+					
+					System.out.println("Goodbye!");
+				}
+				else
+					//For any other response, repeat.
+					System.out.println("Please enter a valid response.\n");
+			}
+			
+			System.out.println();
+			
+			//Reset the loop variable
+			valid = false;
+			
+			//Reset the tip variables
+			tip.setBillAmount(0);
+			tip.setPercentageTip(20);
+			tip.setPartySize(0);
+		}
+		
+		//Close the scanner
+		input.close();
+	}
+
+}

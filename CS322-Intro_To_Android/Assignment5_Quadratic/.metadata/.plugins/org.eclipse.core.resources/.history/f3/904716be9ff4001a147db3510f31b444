@@ -1,0 +1,181 @@
+import java.util.Scanner;
+
+/************************************************************************
+ *                                                                      *    	
+ * CSCI 322/522  			  Assignment 3               		 FA2020 *
+ *                                                            		    * 
+ * 	Class Name: TipApp.java												*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *   Due Date: 11 September 2020										*
+ *   																	*
+ *    Purpose: This java class simulates an app's IO. An app object is  *
+ *    		   created and a TipCalculater object is passed through the *
+ *    		   "app". The app will collect the inputs, pass them to the *
+ *    		   calculator, and return the final results					*
+ *																		*    
+ * *********************************************************************/
+
+public class TipApp extends TipCalculator{
+
+	public static void main(String[] args) {
+		//Create an app object
+		TipApp app = new TipApp(); 
+		
+		//Create a tip object and pass the tip through the app
+		TipCalculator newTip = new TipCalculator();
+		app.calculateTips(newTip);
+	}
+	
+	/******************************************************
+	 * 
+	 * calculateTips gets and checks scanner input, 
+	 * calls related tipCalculator methods, and prints the results
+	 * 
+	 ******************************************************/
+	public void calculateTips(TipCalculator tip) {
+		boolean valid = false;
+		boolean bContinue = true; 
+		double bill = 0;
+		int percentage = 0;
+		int partySize = 0;
+		char cont;
+		
+		Scanner input = new Scanner(System.in);
+		
+		//Repeat input until exit
+		while(bContinue) {
+			//Prompt for bill amount	
+			while(!valid) {
+				System.out.print("Enter the bill amount: ");
+				
+				//Verify it's a double
+				if(input.hasNextDouble()) {
+					//Save the input
+					bill = input.nextDouble();
+					
+					//Is the bill negative?
+					if(bill >= 0) {
+						valid = true;
+						tip.setBillAmount(bill);
+					}
+					else
+						//Bill can't be negative, restart
+						System.out.println("Please enter a valid bill amount.\n");
+				}
+				//Invalid input
+				else {
+					System.out.println("Please enter a valid bill amount.\n");
+					input.next();
+				}
+			}
+			
+			//Reset valid
+			valid = false;
+			
+			//Prompt for tip
+			while(!valid) {
+				System.out.print("Enter the desired tip percentage (20 equals 20%): ");
+				
+				//Verify it's an integer
+				if(input.hasNextInt()) {
+					//Save the input
+					percentage = input.nextInt();
+					
+					//Is percentage negative?
+					if(percentage >= 0) {
+						valid = true;
+						tip.setPercentageTip(percentage);
+					}
+					else
+						//Can't have a negative percentage
+						System.out.println("Please enter a valid bill amount.\n");
+				}
+				//Invalid response
+				else {
+					System.out.println("Please enter a valid bill amount.\n");
+					input.next();
+				}
+			}
+			
+			//Reset valid
+			valid = false;
+			
+			//Prompt for partySize
+			while(!valid) {
+				System.out.print("Enter the size of your party: ");
+				
+				//Verify party size is an integer
+				if(input.hasNextInt()) {
+					//Save the value
+					partySize = input.nextInt();
+					
+					//Party must be greater than 0
+					if(partySize > 0) {
+						valid = true;
+						tip.setPartySize(partySize);
+					}
+					else
+						//Can't have a party less than 1
+						System.out.println("Please enter a valid party size.\n");
+				}
+				//Invalid response
+				else {
+					System.out.println("Please enter a valid party size.\n");
+					input.next();
+				}
+			}
+			
+			//Reset valid
+			valid = false;
+			
+			//Print the result
+			System.out.println("\n*** Your Bill ***\n");
+			System.out.printf("Bill Amount: $%.2f\n", tip.getBillAmount());	//double check the answer is rounded to two decimal points
+			
+			System.out.println("Tip Percentage: " + tip.getPercentageTip() + "%");
+			
+			System.out.println("Party Size: " + tip.getPartySize() + "\n");
+			
+			System.out.printf("Total Bill (with Tip): $%.2f\n", tip.getTotalBill());
+			System.out.printf("Share for Each Individual: $%.2f\n", tip.getIndividualShare());
+			
+			
+			//Prompt for repeat
+			while(!valid) {
+				System.out.print("\nAnother bill? (y/n): ");
+				//Get the first character of the input
+				cont = input.next().charAt(0);
+				
+				//If the response starts with upper or lower case Y
+				if(cont == 'Y' || cont == 'y') {
+					//End the exit prompt
+					valid = true;
+				}
+				else if(cont == 'N' || cont == 'n') {
+					//End the program loop
+					bContinue = false;
+					valid = true;
+					
+					System.out.println("\nGoodbye!");
+				}
+				else
+					//For any other response, repeat. Not acceptable response
+					System.out.println("Please enter a valid response.\n");
+			}
+			
+			System.out.println();
+			
+			//Reset valid. It will skip bill prompt otherwise
+			valid = false;
+			
+			//Reset the tip variables, just to be sure.
+			tip.setBillAmount(0);
+			tip.setPercentageTip(20);
+			tip.setPartySize(0);
+		}
+		
+		//Close the scanner
+		input.close();
+	}
+} //End of class
