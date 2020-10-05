@@ -1,3 +1,19 @@
+/************************************************************************
+ *                                                                      *
+ * CSCI 322/522  			  Assignment 5               		 FA2020 *
+ *                                                            		    *
+ * 	Class Name: MainActivity.java										*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *   Due Date: 9 October 2020							    			*
+ *   																	*
+ *    Purpose: This java class is the driver for the "burger" app.      *
+ *    It creates the view, and has listeners for when inputs are changed*
+ *    When changed, the calories are calculated and the calories are    *
+ *    updated on the bottom.                                            *
+ *																		*
+ * *********************************************************************/
+
 package z1818828.cs.niu.assignment6_radiobuttons;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,16 +31,21 @@ public class MainActivity extends AppCompatActivity {
     int cheeseSelector = 0;
     int sauceSelector = 0;
 
-
+    /******************************************************
+     * onCreate starts the activity, creates the view, and monitors
+     *      for changed inputs.
+     ******************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final calorieInfo caloriesInfo = new calorieInfo();
+        //Create a calorieInfo object to track the calories
+        final CalorieInfo calorieTotal = new CalorieInfo();
 
+        //Calorie counter
         final TextView calories = findViewById(R.id.textViewCalories);
-        calories.setText("Calories: " + calorieInfo.calculateCalories());
+        calories.setText("Calories: " + CalorieInfo.calculateCalories());
 
         //Patty Radio Group Listener
         final RadioGroup patty = (RadioGroup) findViewById(R.id.pattyGroup);
@@ -43,8 +64,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
 
-                caloriesInfo.setPatty(pattySelector);
-                calories.setText("Calories: " + calorieInfo.calculateCalories());
+                //Set the patty calories and update the calories
+                calorieTotal.setPatty(pattySelector);
+                calories.setText("Calories: " + CalorieInfo.calculateCalories());
             }
         });
 
@@ -64,8 +86,10 @@ public class MainActivity extends AppCompatActivity {
                         cheeseSelector = 0;
                         break;
                 }
-                caloriesInfo.setCheese(cheeseSelector);
-                calories.setText("Calories: " + calorieInfo.calculateCalories());
+
+                //set the cheese calories and update the calories
+                calorieTotal.setCheese(cheeseSelector);
+                calories.setText("Calories: " + CalorieInfo.calculateCalories());
             }
         });
 
@@ -78,28 +102,33 @@ public class MainActivity extends AppCompatActivity {
                     baconSelector = 1;
                 else
                     baconSelector = 0;
-                caloriesInfo.setBacon(baconSelector);
-                calories.setText("Calories: " + calorieInfo.calculateCalories());
+
+                //Set the cheese calories and update the calories
+                calorieTotal.setBacon(baconSelector);
+                calories.setText("Calories: " + CalorieInfo.calculateCalories());
             }
         });
 
+        //Sauce Seekbar listener
         final SeekBar sauce = findViewById(R.id.seekBarSauce);
         sauce.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 sauceSelector = progress;
-                caloriesInfo.setSpecialSauce(sauceSelector);
-                calories.setText("Calories: " + calorieInfo.calculateCalories());
+
+                //Set the sauce and update the calories
+                calorieTotal.setSpecialSauce(sauceSelector);
+                calories.setText("Calories: " + CalorieInfo.calculateCalories());
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                //do nothing
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                //do nothing
             }
         });
     }
