@@ -11,13 +11,14 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="24dp"
         app:srcCompat="@drawable/topbun" />
 
     <RadioGroup
+        android:id="@+id/pattyGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -25,22 +26,23 @@
         android:paddingBottom="24dp">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/radioBeefPatty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Beef Patty" />
+            android:checked="true"
+            android:text="@string/beefLabel" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioTurkeyPatty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Turkey Patty" />
+            android:text="@string/turkeyLabel" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/radioVeggiePatty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Veggie Patty" />
+            android:text="@string/veggieLabel" />
 
     </RadioGroup>
 
@@ -49,9 +51,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Bacon" />
+        android:text="@string/baconLabel" />
 
     <RadioGroup
+        android:id="@+id/cheeseGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -59,41 +62,42 @@
         android:paddingBottom="12dp">
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/radioNoCheese"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="No Cheese" />
+            android:checked="true"
+            android:text="@string/noCheeseLabel" />
         <RadioButton
-            android:id="@+id/radioButton5"
+            android:id="@+id/radioCheddar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cheddar" />
+            android:text="@string/cheddarLabel" />
 
         <RadioButton
-            android:id="@+id/radioButton6"
+            android:id="@+id/radioMozz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mozzarella" />
+            android:text="@string/mozzLabel" />
     </RadioGroup>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewSpecialSauce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Special Sauce - up to one teaspoon" />
+        android:text="@string/sauceLabel" />
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/seekBarSauce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="6dp"/>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="12dp"
@@ -101,10 +105,10 @@
         app:srcCompat="@drawable/bottombun" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewCalories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Calories: "
+        android:text="@string/calorieLabel"
         android:textSize="24dp"/>
 </LinearLayout>
