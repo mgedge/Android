@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         cheeseSelector = 2;
                         break;
                     default:
+                        cheeseSelector = 0;
                         break;
                 }
                 caloriesInfo.setCheese(cheeseSelector);
