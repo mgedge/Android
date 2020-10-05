@@ -3,7 +3,6 @@ package z1818828.cs.niu.assignment6_radiobuttons;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
@@ -22,9 +21,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView calories = findViewById(R.id.textViewCalories);
+        final calorieInfo caloriesInfo = new calorieInfo();
 
-        final caloreInfo caloriesInfo = new caloreInfo();
+        final TextView calories = findViewById(R.id.textViewCalories);
+        calories.setText("Calories: " + calorieInfo.calculateCalories());
 
         //Patty Radio Group Listener
         final RadioGroup patty = (RadioGroup) findViewById(R.id.pattyGroup);
@@ -33,17 +33,18 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radioTurkeyPatty:
-                        cheeseSelector = 1;
+                        pattySelector = 1;
                         break;
                     case R.id.radioVeggiePatty:
-                        cheeseSelector = 2;
+                        pattySelector = 2;
                         break;
                     default:
+                        pattySelector = 0;
                         break;
                 }
 
                 caloriesInfo.setPatty(pattySelector);
-                calories.setText("Calories: " + caloreInfo.calculateCalories());
+                calories.setText("Calories: " + calorieInfo.calculateCalories());
             }
         });
 
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 caloriesInfo.setCheese(cheeseSelector);
-                calories.setText("Calories: " + caloreInfo.calculateCalories());
+                calories.setText("Calories: " + calorieInfo.calculateCalories());
             }
         });
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 else
                     baconSelector = 0;
                 caloriesInfo.setBacon(baconSelector);
-                calories.setText("Calories: " + caloreInfo.calculateCalories());
+                calories.setText("Calories: " + calorieInfo.calculateCalories());
             }
         });
 
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 sauceSelector = progress;
                 caloriesInfo.setSpecialSauce(sauceSelector);
-                calories.setText("Calories: " + caloreInfo.calculateCalories());
+                calories.setText("Calories: " + calorieInfo.calculateCalories());
             }
 
             @Override

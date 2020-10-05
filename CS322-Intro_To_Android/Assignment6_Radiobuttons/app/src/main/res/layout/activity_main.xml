@@ -94,7 +94,8 @@
         android:id="@+id/seekBarSauce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="6dp"/>
+        android:max="10"
+        android:paddingTop="6dp" />
 
     <ImageView
         android:id="@+id/imageViewBottom"
