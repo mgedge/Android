@@ -188,11 +188,22 @@
         android:background="?android:attr/listDivider" />
 
     <!-- Output -->
+    <TextView
+        android:id="@+id/textViewCalculatedQuadratic"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="20dp"
+        android:gravity="center"
+        android:text="@string/equation"
+        android:textSize="18sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="2"
+        android:paddingTop="20dp"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
@@ -203,7 +214,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingTop="40dp"
             android:paddingBottom="24dp">
 
             <TextView
@@ -232,7 +242,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingTop="40dp"
             android:paddingBottom="24dp">
 
             <TextView
@@ -254,14 +263,4 @@
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textViewCalculatedQuadratic"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:paddingBottom="20dp"
-        android:text="@string/equation"
-        android:textSize="18sp" />
 </android.widget.LinearLayout>

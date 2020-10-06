@@ -47,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:layout_marginStart="50dp"
             android:orientation="vertical">
 
             <!-- Quadratic A -->
@@ -60,7 +61,6 @@
                     android:id="@+id/textViewQuadraticA"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="50dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"
                     android:text="@string/a"
@@ -89,7 +89,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="50dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"
                     android:text="@string/b"
@@ -117,7 +116,6 @@
                     android:id="@+id/textViewQuadraticC"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="50dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"
                     android:text="@string/c"
@@ -148,13 +146,25 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
+            android:paddingTop="12dp"
             android:paddingStart="25dp"
             android:paddingEnd="50dp">
+
+            <TextView
+                android:id="@+id/textViewCalculatedQuadratic"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="@string/equation"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:paddingTop="12dp"
                 android:baselineAligned="false"
                 android:orientation="horizontal">
 
@@ -163,8 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingTop="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textViewFirstValueTitle"
@@ -190,8 +199,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingTop="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textViewSecondValueTitle"
@@ -212,17 +220,6 @@
                         android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/textViewCalculatedQuadratic"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="@string/equation"
-                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 
