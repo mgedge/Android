@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Assignment5</string>
+    <string name="quadratic_formula_calculator">Quadratic Formula Calculator</string>
+    <string name="equation">Equation?</string>
+    <string name="quadratic_a">Quadratic A</string>
+    <string name="quadratic_b">Quadratic B</string>
+    <string name="quadratic_c">Quadratic C</string>
+    <string name="a">A</string>
+    <string name="b">B</string>
+    <string name="c">C</string>
+    <string name="first_x_value">First X Value</string>
+    <string name="second_x_value">Second X Value</string>
+    <string name="x">X</string>
+    <string name="calculate">Calculate!</string>
+    <string name="clear">Clear!</string>
+    <string name="default_equation">Ax² + Bx + C = 0</string>
+    <string name="no_vale">No value</string>
+    <string name="imaginary">Imaginary</string>
 </resources>

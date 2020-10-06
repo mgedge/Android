@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
@@ -12,13 +11,13 @@
         android:id="@+id/textViewTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:textColor="@color/colorPrimaryDark"
         android:background="@color/colorPrimary"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Quadratic Formula Calculator"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="@string/quadratic_formula_calculator"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="36sp" />
 
     <TextView
@@ -28,16 +27,17 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:paddingTop="18dp"
-        android:text="Sample Text"
+        android:text="@string/equation"
         android:textSize="24sp" />
 
     <View
         android:id="@+id/divider1"
         android:layout_width="match_parent"
-        android:layout_marginTop="24dp"
         android:layout_height="1dp"
+        android:layout_marginTop="24dp"
         android:background="?android:attr/listDivider" />
 
+    <!-- Quadratic A -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -49,7 +49,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
-            android:text="A"
+            android:text="@string/a"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,17 +59,15 @@
             android:id="@+id/editTextQuadraticA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autofillHints="@string/quadratic_a"
             android:ems="10"
-            android:hint="Quadratic A"
+            android:hint="@string/quadratic_a"
             android:inputType="numberDecimal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textViewQuadraticA"
             app:layout_constraintTop_toTopOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <View
         android:id="@+id/divider2"
@@ -77,6 +75,7 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
 
+    <!-- Quadratic B -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -88,7 +87,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
-            android:text="B"
+            android:text="@string/b"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -98,15 +97,14 @@
             android:id="@+id/editTextQuadraticB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autofillHints="@string/quadratic_b"
             android:ems="10"
-            android:hint="Quadratic B"
+            android:hint="@string/quadratic_b"
             android:inputType="numberDecimal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textViewQuadraticB"
             app:layout_constraintTop_toTopOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -115,6 +113,7 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
 
+    <!-- Quadratic C -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -126,7 +125,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
-            android:text="C"
+            android:text="@string/c"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -136,15 +135,14 @@
             android:id="@+id/editTextQuadraticC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autofillHints="@string/quadratic_c"
             android:ems="10"
-            android:hint="Quadratic C"
+            android:hint="@string/quadratic_c"
             android:inputType="numberDecimal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textViewQuadraticC"
             app:layout_constraintTop_toTopOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -153,11 +151,12 @@
         android:layout_height="2dp"
         android:background="?android:attr/listDivider" />
 
+    <!-- Button Group -->
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="30dp"
-            android:paddingBottom="30dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp">
 
         <Button
             android:id="@+id/buttonCalculate"
@@ -166,20 +165,20 @@
             android:layout_marginStart="24dp"
             android:layout_weight="1"
             android:background="@drawable/round_rect_shape"
-            android:text="Calculate!"
+            android:text="@string/calculate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/buttonClear"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_rect_shape"
-                android:text="Clear!"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/buttonClear"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_rect_shape"
+            android:text="@string/clear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -188,13 +187,16 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
 
+    <!-- Output -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="2"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
+        <!-- First value -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -208,9 +210,8 @@
                 android:id="@+id/textViewFirstValueTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
-                android:text="First X Value"
+                android:text="@string/first_x_value"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -218,15 +219,13 @@
                 android:id="@+id/textViewFirstValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="24dp"
                 android:gravity="center"
-                android:text="X"
+                android:paddingTop="24dp"
+                android:text="@string/x"
                 android:textSize="18sp" />
-
-
         </LinearLayout>
 
+        <!-- Second value -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -240,9 +239,8 @@
                 android:id="@+id/textViewSecondValueTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
-                android:text="Second X Value"
+                android:text="@string/second_x_value"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -250,13 +248,11 @@
                 android:id="@+id/textViewSecondValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="24dp"
                 android:gravity="center"
-                android:text="X"
+                android:paddingTop="24dp"
+                android:text="@string/x"
                 android:textSize="18sp" />
         </LinearLayout>
-
     </LinearLayout>
 
     <TextView
@@ -264,9 +260,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center"
-        android:text="Sample Text"
+        android:gravity="center_horizontal"
         android:paddingBottom="20dp"
+        android:text="@string/equation"
         android:textSize="18sp" />
-
 </android.widget.LinearLayout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
@@ -12,14 +11,14 @@
         android:id="@+id/textViewTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:textColor="@color/colorPrimaryDark"
         android:background="@color/colorPrimary"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:text="Quadratic Formula Calculator"
-        android:textSize="24dp" />
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="@string/quadratic_formula_calculator"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textViewTitle2"
@@ -28,34 +27,34 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:paddingTop="18dp"
-        android:text="Equation?"
-        android:textSize="18dp" />
+        android:text="@string/equation"
+        android:textSize="18sp" />
 
     <View
         android:id="@+id/divider1"
         android:layout_width="match_parent"
-        android:layout_marginTop="6dp"
         android:layout_height="1dp"
+        android:layout_marginTop="6dp"
         android:background="?android:attr/listDivider" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <!-- Left side inputs -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:orientation="vertical">
 
             <!-- Quadratic A -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textViewQuadraticA"
@@ -64,7 +63,7 @@
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"
-                    android:text="A"
+                    android:text="@string/a"
                     android:textSize="24sp" />
 
                 <EditText
@@ -72,8 +71,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:autofillHints="Quadratic A"
                     android:ems="10"
-                    android:hint="Quadratic A"
+                    android:hint="@string/quadratic_a"
                     android:inputType="numberDecimal" />
             </LinearLayout> <!-- EO Quadratic A -->
 
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textViewQuadraticB"
@@ -92,7 +92,7 @@
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"
-                    android:text="B"
+                    android:text="@string/b"
                     android:textSize="24sp" />
 
                 <EditText
@@ -100,8 +100,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:autofillHints="Quadratic B"
                     android:ems="10"
-                    android:hint="Quadratic B"
+                    android:hint="@string/quadratic_b"
                     android:inputType="numberDecimal" />
             </LinearLayout><!-- EO Quadratic B -->
 
@@ -110,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textViewQuadraticC"
@@ -119,7 +120,7 @@
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"
-                    android:text="C"
+                    android:text="@string/c"
                     android:textSize="24sp" />
 
                 <EditText
@@ -127,8 +128,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:autofillHints="Quadratic C"
                     android:ems="10"
-                    android:hint="Quadratic C"
+                    android:hint="@string/quadratic_c"
                     android:inputType="numberDecimal" />
             </LinearLayout><!-- EO Quadratic C -->
         </LinearLayout>
@@ -137,24 +139,23 @@
             android:id="@+id/dividerSplit"
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
             android:background="?android:attr/listDivider" />
 
         <!-- Right side output -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="25dp"
-            android:paddingRight="50dp"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_weight="1" >
+            android:paddingStart="25dp"
+            android:paddingEnd="50dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="2"
-
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -163,16 +164,14 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingTop="40dp"
-                    android:paddingBottom="24dp">
+                    android:paddingTop="24dp">
 
                     <TextView
                         android:id="@+id/textViewFirstValueTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="First X Value"
+                        android:text="@string/first_x_value"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -180,13 +179,10 @@
                         android:id="@+id/textViewFirstValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingTop="24dp"
                         android:gravity="center"
-                        android:text="X"
+                        android:paddingTop="12dp"
+                        android:text="@string/x"
                         android:textSize="18sp" />
-
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -195,16 +191,14 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingTop="40dp"
-                    android:paddingBottom="24dp">
+                    android:paddingTop="24dp">
 
                     <TextView
                         android:id="@+id/textViewSecondValueTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Second X Value"
+                        android:text="@string/second_x_value"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -212,14 +206,23 @@
                         android:id="@+id/textViewSecondValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingTop="24dp"
                         android:gravity="center"
-                        android:text="X"
+                        android:paddingTop="12dp"
+                        android:text="@string/x"
                         android:textSize="18sp" />
                 </LinearLayout>
-
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewCalculatedQuadratic"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="@string/equation"
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -231,36 +234,34 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:orientation="horizontal"
+        android:layout_height="fill_parent"
         android:layout_gravity="center_horizontal"
-        android:layout_height="fill_parent">
+        android:orientation="horizontal"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp">
 
         <Button
             android:id="@+id/buttonCalculate"
             android:layout_width="150dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
+            android:layout_weight="1"
             android:background="@drawable/round_rect_shape"
-            android:text="Calculate!" />
+            android:text="@string/calculate" />
 
         <Button
             android:id="@+id/buttonClear"
             android:layout_width="150dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
+            android:layout_weight="1"
             android:background="@drawable/round_rect_shape"
-            android:text="Clear!"
+            android:text="@string/clear"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
     </LinearLayout>
 </android.widget.LinearLayout>
