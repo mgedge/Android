@@ -15,12 +15,15 @@
 package z1818828.cs.niu.assignment7_intents;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -28,7 +31,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 public class layoutAdapter extends RecyclerView.Adapter<layoutAdapter.MyViewHolder> {
+    public static final String EXTRA = "z1818828.cs.niu.edu.EXTRA";
     private List<ItemC> dataSet;
     private Context context;
 
@@ -52,10 +58,20 @@ public class layoutAdapter extends RecyclerView.Adapter<layoutAdapter.MyViewHold
         holder.description.setText(item.getImage());
         holder.image.setBackgroundResource(item.getImage());
 
+        //Create on click listener for clicked card
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, item.getTitle() + " selected", Toast.LENGTH_LONG).show();
+
+                //Setup the next activity
+                Intent intent = new Intent(v.getContext(), DisplayCardActivity.class);
+
+                //Store data for card
+                intent.putExtra(EXTRA, item.getTitle());
+
+                //Start new activity
+                v.getContext().startActivity(intent);
             }
         });
     }

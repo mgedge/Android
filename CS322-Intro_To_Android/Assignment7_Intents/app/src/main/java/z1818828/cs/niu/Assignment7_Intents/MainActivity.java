@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Set the title
         appTitle = findViewById(R.id.textView);
         appTitle.setText("Title of the app!");
 
