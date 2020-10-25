@@ -1,4 +1,4 @@
-package z1818828.cs.niu.assignment6_radiobuttons;
+package z1818828.cs.niu.assignment7_intents;
 
 import org.junit.Test;
 

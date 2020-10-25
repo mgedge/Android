@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Assignment6_Radiobuttons"
+rootProject.name = "Assignment7_Intents"

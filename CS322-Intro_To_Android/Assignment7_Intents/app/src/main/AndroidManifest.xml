@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="z1818828.cs.niu.assignment6_radiobuttons">
+    package="z1818828.cs.niu.assignment7_intents">
 
     <application
         android:allowBackup="true"
