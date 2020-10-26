@@ -1,3 +1,90 @@
 <resources>
     <string name="app_name">Assignment7_Intents</string>
+    <!-- Titles -->
+    <string name="Title_App">Barbell Exercises</string>
+    <string name="Title_Squat">Squat</string>
+    <string name="Title_Bench">Bench</string>
+    <string name="Title_Deadlift">Deadlift</string>
+    <string name="Title_Overhead_Press">Overhead Press</string>
+    <string name="Title_Row">Row</string>
+    <!-- Short descriptions -->
+    <string name="Description_Short_Squat">Squatting a barbell on the back</string>
+    <string name="Description_Short_Bench">Pushing a barbell off the chest</string>
+    <string name="Description_Short_Deadlift">Lifting a barbell off the floor</string>
+    <string name="Description_Short_Overhead">Pushing a barbell above the head</string>
+    <string name="Description_Short_Row">Pulling a barbell to the body</string>
+    <!-- Long descriptions -->
+    <string name="Description_Long_Squat"><![CDATA[
+        <h2>Squatting a barbell on the back is an excellent strengthening exercise for the lower body and core.</h2>
+        <p>Perform a squat by following these steps:</p>
+        <p>   1. Begin by standing under the bar. Place the bar on your upper back and grab the bar about shoulder width.</p>
+        <p>   2. Unrack the bar and establish a squat stance, feet shoulder width or wider.</p>
+        <p>   3. As you descend, keep your chest up and you neck in a neutral position.</p>
+        <p>   4. Continue to descend until your thighs are parallel to the floor.</p>
+        <p>   5. Rise up from parallel driving through your heels. Squeeze your glutes at the top.</p>
+        <p>Now you know how to perform the squat. The squat is a challenging exercise but is extremely rewarding in any training program. Some complementary exercises include:</p>
+        <ul>
+            <li>Romanian Deadlifts</li>
+            <li>Good Mornings</li>
+            <li>Bulgarian Split Squat</li>
+        </ul>
+    ]]>
+    </string>
+    <string name="Description_Long_Bench"><![CDATA[
+        <h2>The barbell bench is an excellent strengthening exercise for the chest, triceps, and delts.</h2>
+        <p>Perform a bench by following these steps:</p>
+        <p>   1. Begin by laying on the bench with your eyes below the bar. You may opt to arch your back to reduce the bar path. Place your hands shoulder width on the bar.</p>
+        <p>   2. Unrack the bar and "rest" the bar directly above the shoulder joint.</p>
+        <p>   3. As you descend, squeeze your back to maintain rigidity.</p>
+        <p>   4. Continue to descend until the bar touches your chest.</p>
+        <p>   5. Push the bar off your chest, mentally bending the bar and driving through your feet.</p>
+        <p>Now you know how to perform the bench press. The bench press is a challenging exercise but is extremely rewarding in any training program. Some complementary exercises include:</p>
+        <ul>
+            <li>Incline Dumbbell Bench Press</li>
+            <li>Lying Tricep Extenstions</li>
+        </ul>
+    ]]></string>
+    <string name="Description_Long_Deadlift"><![CDATA[
+        <h2>The Deadlift is an excellent strengthening exercise for the lower body, core, and upper body.</h2>
+        <p>Perform a Deadlift by following these steps:</p>
+        <p>   1. Begin by standing shoulder width apart with the bar midway into your foot.</p>
+        <p>   2. Grip the bar and drop your hips. Keep your back straight and your chest up.</p>
+        <p>   3. As you ascend, drive your heels into the ground. </p>
+        <p>   4. Keep your legs straight until the bar reaches your knees, then squeeze your gluts to get to the top.</p>
+        <p>   5. Once at the top, simply reverse the steps to drop the weight.</p>
+        <p>Now you know how to perform the deadlift. The deadlift is an extremely challenging exercise that should be included in every training program since it teaches you how to safely lift things off the floor. Some complementary exercises include:</p>
+        <ul>
+            <li>Romanian Deadlifts</li>
+            <li>Good Mornings</li>
+            <li>Front Squat</li>
+            <li>Farmers Walk</li>
+        </ul>
+    ]]></string>
+    <string name="Description_Long_Overhead"><![CDATA[
+        <h2>The overhead press is an excellent strengthening exercise for the delts, triceps, and core.</h2>
+        <p>Perform an overhead press by following these steps:</p>
+        <p>   1. Begin by standing behind the bar. Grab the bar about shoulder width and get under the bar.</p>
+        <p>   2. Unrack the bar and establish a squat stance, feet shoulder width or wider.</p>
+        <p>   3. Press the bar up engaging your core. When the bar reaches above your head, fully extend your elbows.</p>
+        <p>   4. Reverse the previous steps to return to the bottom of the rep</p>
+        <p>Now you know how to perform the overhead press. The overhead press is an excellent exercise to develop your core and overhead strength. Some complementary exercises include:</p>
+        <ul>
+            <li>Pin Press</li>
+            <li>Seated Dumbbell Press</li>
+        </ul>
+    ]]></string>
+    <string name="Description_Long_Row"><![CDATA[
+        <h2>Rowing a barbell is an excellent strengthening exercise for the lower body and back.</h2>
+        <p>Perform a barbell row by following these steps:</p>
+        <p>   1. Begin by standing shoulder width apart with the bar midway into your foot.</p>
+        <p>   2. Grip the bar and keep your back straight and your chest up.</p>
+        <p>   3. Pull the bar towards your back and bring your elbows behind your back. </p>
+        <p>   4. Once at the top, simply reverse the steps to drop the weight.</p>
+        <p>Now you know how to perform the barbell row. The barbell row is a great exercise for developing the back. Some complementary exercises include:</p>
+        <ul>
+            <li>Deadlifts</li>
+            <li>Pullups</li>
+            <li>Dumbbell Row</li>
+        </ul>
+    ]]></string>
 </resources>

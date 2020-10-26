@@ -14,6 +14,7 @@ package z1818828.cs.niu.assignment7_intents;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -26,6 +27,9 @@ public class DisplayCardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_card);
+
+        //Hide the title
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Get the activity data from caller
         Intent intent = getIntent();
@@ -47,28 +51,27 @@ public class DisplayCardActivity extends AppCompatActivity {
         TextView textViewDesc = findViewById(R.id.description);
         textViewDesc.setMovementMethod(new ScrollingMovementMethod());
 
-
         //Set the description and the gif based on the title
         switch (textviewTitle.getText().toString()) {
             case "Squat":
                 gif.loadUrl("file:///android_asset/squat-resize.gif");
-                textViewDesc.setText("The squat is an exercise...");
+                textViewDesc.setText(Html.fromHtml(getString(R.string.Description_Long_Squat)));
                 break;
             case "Bench":
-                gif.loadUrl("file:///android_asset/bench.gif");
-                textViewDesc.setText("The squat is an exercise...");
+                gif.loadUrl("file:///android_asset/bench-resize.gif");
+                textViewDesc.setText(Html.fromHtml(getString(R.string.Description_Long_Bench)));
                 break;
             case "Deadlift":
-                gif.loadUrl("file:///android_asset/deadlift.webp");
-                textViewDesc.setText("At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.");
+                gif.loadUrl("file:///android_asset/deadlift-resize.webp");
+                textViewDesc.setText(Html.fromHtml(getString(R.string.Description_Long_Deadlift)));
                 break;
             case "Overhead Press":
-                gif.loadUrl("file:///android_asset/overhead.gif");
-                textViewDesc.setText("The squat is an exercise...");
+                gif.loadUrl("file:///android_asset/overhead-resize.gif");
+                textViewDesc.setText(Html.fromHtml(getString(R.string.Description_Long_Overhead)));
                 break;
             case "Row":
-                gif.loadUrl("file:///android_asset/row.gif");
-                textViewDesc.setText("The squat is an exercise...");
+                gif.loadUrl("file:///android_asset/row-resize.gif");
+                textViewDesc.setText(Html.fromHtml(getString(R.string.Description_Long_Row)));
                 break;
             default:
                 break;

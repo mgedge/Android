@@ -35,9 +35,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Remove the actionbar
+        getSupportActionBar().hide();
+
         //Set the title
         appTitle = findViewById(R.id.textView);
-        appTitle.setText("Powerlifting");
+        appTitle.setText(R.string.Title_App);
 
         //Set recycler view
         recyclerView = findViewById(R.id.recyclerView);
@@ -61,19 +64,19 @@ public class MainActivity extends AppCompatActivity {
     This class will add Item data to the List
      */
     private void prepareRecycler() {
-        ItemC item = new ItemC("Squat", "Squatting a barbell on the back", R.drawable.squat);
+        ItemC item = new ItemC(getString(R.string.Title_Squat), getString(R.string.Description_Short_Squat), R.drawable.squat);
         dataSet.add(item);
 
-        item = new ItemC("Bench", "Pushing a barbell off the chest", R.drawable.bench_press2);
+        item = new ItemC(getString(R.string.Title_Bench), getString(R.string.Description_Short_Bench), R.drawable.bench_press2);
         dataSet.add(item);
 
-        item = new ItemC("Deadlift", "Lifting a barbell off the floor", R.drawable.deadlift);
+        item = new ItemC(getString(R.string.Title_Deadlift), getString(R.string.Description_Short_Deadlift), R.drawable.deadlift);
         dataSet.add(item);
 
-        item = new ItemC("Overhead Press", "Pushing a barbell above the head", R.drawable.overhead);
+        item = new ItemC(getString(R.string.Title_Overhead_Press), getString(R.string.Description_Short_Overhead), R.drawable.overhead);
         dataSet.add(item);
 
-        item = new ItemC("Row", "Pulling a barbell to the body", R.drawable.row);
+        item = new ItemC(getString(R.string.Title_Row), getString(R.string.Description_Short_Row), R.drawable.row);
         dataSet.add(item);
     }
 }
