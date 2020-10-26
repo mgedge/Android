@@ -1,15 +1,13 @@
 /*********************************************************************
  CSCI 322/522  			  Assignment 7               		 FA2020
 
- Class Name: MainActivity.java
+ Class Name: ItemC.java
 
  Developer: Matthew Gedge
- Due Date: 11 September 2020
+ Due Date: 6 November 2020
 
- Purpose: This java class starts the activity and runs the UI.
- When the calculate button is pressed, the inputs are checked for
- validity and the discriminate and x values are calculated.
- When the clear button is pressed, inputs and outputs are emptied.
+ Purpose: This java class creates the ItemC object with a constructor and
+ the get/set classes for each data type in the object.
  *********************************************************************/
 
 package z1818828.cs.niu.assignment7_intents;

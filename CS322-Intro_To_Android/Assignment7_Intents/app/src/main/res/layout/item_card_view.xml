@@ -28,7 +28,9 @@
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="sans-serif-smallcaps"
             android:gravity="center_vertical"
             android:lines="1"
@@ -39,26 +41,27 @@
             cardView:layout_constraintEnd_toEndOf="parent"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toBottomOf="@+id/image"
-            cardView:layout_constraintVertical_bias="1.0"
-            cardView:layout_constraintVertical_weight="1"
-            tools:text="@tools:sample/full_names" />
+            tools:text="@tools:sample/lorem" />
 
         <TextView
             android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
             android:fontFamily="sans-serif-medium"
-            android:gravity="center_vertical"
-            android:lines="2"
-            android:padding="5dp"
+            android:gravity="start"
+            android:lines="1"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="5dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@android:color/black"
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toBottomOf="@+id/title"
-            cardView:layout_constraintVertical_weight="1"
             tools:text="@tools:sample/lorem/random" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

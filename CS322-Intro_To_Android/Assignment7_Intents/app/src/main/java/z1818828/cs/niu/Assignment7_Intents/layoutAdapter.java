@@ -4,12 +4,10 @@
  Class Name: layoutAdapter.java
 
  Developer: Matthew Gedge
- Due Date: 11 September 2020
+ Due Date: 6 November 2020
 
- Purpose: This java class starts the activity and runs the UI.
- When the calculate button is pressed, the inputs are checked for
- validity and the discriminate and x values are calculated.
- When the clear button is pressed, inputs and outputs are emptied.
+ Purpose: This java class is the adapter between the recycler view and
+ its card items. A list is created to keep track of the individual cards.
  *********************************************************************/
 
 package z1818828.cs.niu.assignment7_intents;
@@ -22,8 +20,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -31,7 +27,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class layoutAdapter extends RecyclerView.Adapter<layoutAdapter.MyViewHolder> {
     public static final String EXTRA = "z1818828.cs.niu.edu.EXTRA";
@@ -45,17 +40,24 @@ public class layoutAdapter extends RecyclerView.Adapter<layoutAdapter.MyViewHold
 
     @NonNull
     @Override
+    /*
+        Setup to use the cardview for each item in recycler
+     */
     public layoutAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card_view, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
+    /*
+        Populate the card with its respective data and setup a listener for when each card
+        is clicked.
+     */
     public void onBindViewHolder(@NonNull layoutAdapter.MyViewHolder holder, int position) {
         final ItemC item = dataSet.get(position);
 
         holder.title.setText(item.getTitle());
-        holder.description.setText(item.getImage());
+        holder.description.setText(item.getDescription());
         holder.image.setBackgroundResource(item.getImage());
 
         //Create on click listener for clicked card
@@ -81,6 +83,9 @@ public class layoutAdapter extends RecyclerView.Adapter<layoutAdapter.MyViewHold
         return dataSet.size();
     }
 
+    /*
+        Get the card u.i IDs
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private TextView description;

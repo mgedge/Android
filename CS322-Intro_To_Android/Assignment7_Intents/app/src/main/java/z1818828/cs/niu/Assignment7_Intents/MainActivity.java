@@ -4,12 +4,11 @@
  Class Name: MainActivity.java
 
  Developer: Matthew Gedge
- Due Date: 11 September 2020
+ Due Date: 6 November 2020
 
  Purpose: This java class starts the activity and runs the UI.
- When the calculate button is pressed, the inputs are checked for
- validity and the discriminate and x values are calculated.
- When the clear button is pressed, inputs and outputs are emptied.
+ When a card is pressed, A second activity is started which will
+ contain more information about the card.
  *********************************************************************/
 
 package z1818828.cs.niu.assignment7_intents;
@@ -38,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
         //Set the title
         appTitle = findViewById(R.id.textView);
-        appTitle.setText("Title of the app!");
+        appTitle.setText("Powerlifting");
 
         //Set recycler view
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
 
         //Setup layout manager for the recycler view
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         //Create an empty data set
@@ -58,14 +57,23 @@ public class MainActivity extends AppCompatActivity {
         prepareRecycler();
     }
 
+    /*
+    This class will add Item data to the List
+     */
     private void prepareRecycler() {
-        ItemC item = new ItemC("Item 1", "This is item 1", R.drawable.ic_launcher_background);
+        ItemC item = new ItemC("Squat", "Squatting a barbell on the back", R.drawable.squat);
         dataSet.add(item);
 
-        item = new ItemC("Item 2", "This is item 2", R.drawable.ic_launcher_background);
+        item = new ItemC("Bench", "Pushing a barbell off the chest", R.drawable.bench_press2);
         dataSet.add(item);
 
-        item = new ItemC("Item 3", "This is item 3", R.drawable.ic_launcher_background);
+        item = new ItemC("Deadlift", "Lifting a barbell off the floor", R.drawable.deadlift);
+        dataSet.add(item);
+
+        item = new ItemC("Overhead Press", "Pushing a barbell above the head", R.drawable.overhead);
+        dataSet.add(item);
+
+        item = new ItemC("Row", "Pulling a barbell to the body", R.drawable.row);
         dataSet.add(item);
     }
 }
