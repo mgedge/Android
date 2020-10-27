@@ -57,7 +57,7 @@
             android:paddingEnd="5dp"
             android:paddingBottom="5dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@android:color/black"
+            android:textColor="@color/darkGray"
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
             cardView:layout_constraintStart_toStartOf="parent"

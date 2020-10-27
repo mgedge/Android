@@ -16,7 +16,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -44,8 +43,6 @@ public class DisplayCardActivity extends AppCompatActivity {
 
         //Set up the gif viewer
         WebView gif = findViewById(R.id.gif);
-        WebSettings webSettings = gif.getSettings();
-        webSettings.setJavaScriptEnabled(true);
 
         //Create the description variable
         TextView textViewDesc = findViewById(R.id.description);

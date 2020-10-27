@@ -4,4 +4,5 @@
     <color name="colorAccentDark">#696969</color>
     <color name="colorAccent">#A9A9A9</color>A9A9A9
     <color name="brightWhite">#FFFFFF</color>
+    <color name="darkGray">#595959</color>
 </resources>
