@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<ItemC> dataSet;
+    private List<Exercise> dataSet;
     private TextView appTitle;
 
     @Override
@@ -64,19 +64,19 @@ public class MainActivity extends AppCompatActivity {
     This class will add Item data to the List
      */
     private void prepareRecycler() {
-        ItemC item = new ItemC(getString(R.string.Title_Squat), getString(R.string.Description_Short_Squat), R.drawable.squat);
-        dataSet.add(item);
+        Exercise exercise = new Exercise(getString(R.string.Title_Squat), getString(R.string.Description_Short_Squat), R.drawable.squat);
+        dataSet.add(exercise);
 
-        item = new ItemC(getString(R.string.Title_Bench), getString(R.string.Description_Short_Bench), R.drawable.bench_press2);
-        dataSet.add(item);
+        exercise = new Exercise(getString(R.string.Title_Bench), getString(R.string.Description_Short_Bench), R.drawable.bench_press2);
+        dataSet.add(exercise);
 
-        item = new ItemC(getString(R.string.Title_Deadlift), getString(R.string.Description_Short_Deadlift), R.drawable.deadlift);
-        dataSet.add(item);
+        exercise = new Exercise(getString(R.string.Title_Deadlift), getString(R.string.Description_Short_Deadlift), R.drawable.deadlift);
+        dataSet.add(exercise);
 
-        item = new ItemC(getString(R.string.Title_Overhead_Press), getString(R.string.Description_Short_Overhead), R.drawable.overhead);
-        dataSet.add(item);
+        exercise = new Exercise(getString(R.string.Title_Overhead_Press), getString(R.string.Description_Short_Overhead), R.drawable.overhead);
+        dataSet.add(exercise);
 
-        item = new ItemC(getString(R.string.Title_Row), getString(R.string.Description_Short_Row), R.drawable.row);
-        dataSet.add(item);
+        exercise = new Exercise(getString(R.string.Title_Row), getString(R.string.Description_Short_Row), R.drawable.row);
+        dataSet.add(exercise);
     }
 }

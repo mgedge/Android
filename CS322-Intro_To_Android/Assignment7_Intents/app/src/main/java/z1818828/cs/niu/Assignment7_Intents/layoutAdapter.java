@@ -29,10 +29,10 @@ import java.util.List;
 
 public class layoutAdapter extends RecyclerView.Adapter<layoutAdapter.MyViewHolder> {
     public static final String EXTRA = "z1818828.cs.niu.edu.EXTRA";
-    private List<ItemC> dataSet;
+    private List<Exercise> dataSet;
     private Context context;
 
-    layoutAdapter(Context context, List<ItemC> dataSet) {
+    layoutAdapter(Context context, List<Exercise> dataSet) {
         this.context = context;
         this.dataSet = dataSet;
     }
@@ -53,7 +53,7 @@ public class layoutAdapter extends RecyclerView.Adapter<layoutAdapter.MyViewHold
         is clicked.
      */
     public void onBindViewHolder(@NonNull layoutAdapter.MyViewHolder holder, int position) {
-        final ItemC item = dataSet.get(position);
+        final Exercise item = dataSet.get(position);
 
         holder.title.setText(item.getTitle());
         holder.description.setText(item.getDescription());

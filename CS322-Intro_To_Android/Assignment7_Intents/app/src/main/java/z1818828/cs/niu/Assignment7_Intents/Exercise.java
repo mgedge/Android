@@ -1,23 +1,23 @@
 /*********************************************************************
  CSCI 322/522  			  Assignment 7               		 FA2020
 
- Class Name: ItemC.java
+ Class Name: Exercise.java
 
  Developer: Matthew Gedge
  Due Date: 6 November 2020
 
- Purpose: This java class creates the ItemC object with a constructor and
+ Purpose: This java class creates the Exercise object with a constructor and
  the get/set classes for each data type in the object.
  *********************************************************************/
 
 package z1818828.cs.niu.assignment7_intents;
 
-public class ItemC {
+public class Exercise {
     private String title;
     private String description;
     private int image;
 
-    public ItemC(String title, String description, int image) {
+    public Exercise(String title, String description, int image) {
         this.title = title;
         this.description = description;
         this.image = image;
