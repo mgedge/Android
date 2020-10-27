@@ -80,3 +80,20 @@ public class MainActivity extends AppCompatActivity {
         dataSet.add(exercise);
     }
 }
+
+/*****************************************************
+ CREDITS FOR IMAGES/GIFS:
+ Images:
+ squat -        https://simplifaster.com/articles/should-athletes-barbell-squat/
+ bench press -  https://www.menshealth.com/uk/building-muscle/a755647/how-to-master-the-bench-press/
+ deadlift -     https://physiqz.com/powerlifting-programs/deadlift-workout/
+ overhead -     https://www.t-nation.com/training/tip-smashing-an-overhead-press-plateau
+ row -          https://www.t-nation.com/training/tip-do-the-tabletop-row
+
+ Gifs:
+ squat -        http://traininggifs.com/muscle-group/glutes/standard-barbell-squat-with-perfect-form/
+ bench press -  https://www.menshealth.com/uk/building-muscle/a755647/how-to-master-the-bench-press/
+ deadlift -     https://www.gymguider.com/how-to-do-deadlift/
+ overhead -     https://www.menshealth.com/uk/building-muscle/a756959/how-to-perfect-the-overhead-press/
+ row -          https://www.menshealth.com/uk/building-muscle/a757301/how-to-master-the-bent-over-row/
+ *****************************************************/
