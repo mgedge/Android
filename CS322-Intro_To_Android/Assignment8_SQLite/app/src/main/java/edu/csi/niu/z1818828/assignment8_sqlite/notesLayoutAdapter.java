@@ -16,19 +16,21 @@ import java.util.List;
 
 public class notesLayoutAdapter extends RecyclerView.Adapter<notesLayoutAdapter.MyViewHolder> {
     private SQLiteDatabase dbManager;
+    private OnNoteListener listener;
     List<Note> notes;
     Context context;
 
-    public notesLayoutAdapter(Context context, List<Note> notes) {
+    public notesLayoutAdapter(Context context, List<Note> notes, OnNoteListener listener) {
         this.notes = notes;
         this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public notesLayoutAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_note, parent, false);
-        return new MyViewHolder(v);
+        return new MyViewHolder(v, listener);
     }
 
     @NonNull
@@ -45,16 +47,30 @@ public class notesLayoutAdapter extends RecyclerView.Adapter<notesLayoutAdapter.
         return notes.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title;
         private TextView desc;
         private CardView cardView;
+        OnNoteListener listener;
 
-        public MyViewHolder(View v) {
+        public MyViewHolder(View v, OnNoteListener listener) {
             super(v);
             title = v.findViewById(R.id.textviewTitle);
             desc = v.findViewById(R.id.textViewNote);
             cardView = v.findViewById(R.id.cardView_note);
+            this.listener = listener;
+
+            v.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            listener.onNoteClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnNoteListener{
+        void onNoteClick(int position);
+
     }
 }

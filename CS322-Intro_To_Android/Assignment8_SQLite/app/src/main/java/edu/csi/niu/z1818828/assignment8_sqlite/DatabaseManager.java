@@ -59,6 +59,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String sqlDelete = "delete from " + TABLE_TITLE;
         sqlDelete += " where " + ID + " = " + id;
 
+        Log.w("deleteById", sqlDelete);
+
         db.execSQL(sqlDelete);
         db.close();
     }
@@ -69,6 +71,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         sqlUpdate += " set " + TITLE + " = '" + title + "', ";
         sqlUpdate += NOTE + " = '" + note + "'";
         sqlUpdate += " where " + ID + " = " + id;
+
+        Log.w("updateByID", sqlUpdate);
 
         db.execSQL(sqlUpdate);
         db.close();

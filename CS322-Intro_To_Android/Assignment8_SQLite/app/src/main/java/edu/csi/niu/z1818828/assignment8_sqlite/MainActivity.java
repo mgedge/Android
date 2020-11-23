@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements notesLayoutAdapter.OnNoteListener {
     private TextView noNotes;
     private DatabaseManager dbManager;
     private RecyclerView recyclerView;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         storeData();
 
-        adapter = new notesLayoutAdapter(this, notes);
+        adapter = new notesLayoutAdapter(this, notes, this);
         recyclerView.setAdapter(adapter);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -71,5 +71,12 @@ public class MainActivity extends AppCompatActivity {
                 notes.add(note);
             }
         }
+    }
+
+    @Override
+    public void onNoteClick(int position) {
+        notes.get(position);
+        Intent intent = new Intent(this, UpdateNoteActivity.class);
+        startActivity(intent);
     }
 }

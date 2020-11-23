@@ -68,7 +68,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
     public void delete() {
         dbManager.deleteById(1); //TODO change to match the calling card Pos
 
-        Toast.makeText(this, "Note successfully added!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Note successfully deleted!", Toast.LENGTH_SHORT).show();
         finish();
     }
 }
