@@ -6,8 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.ArrayList;
-
 public class DatabaseManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "noteDB";
     private static final int DATABASE_VERSION = 1;
@@ -54,15 +52,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteById(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String sqlDelete = "delete from " + TABLE_TITLE;
-        sqlDelete += " where " + ID + " = " + id;
+    public Cursor readAll() {
+        String sqlQuery = "select * from " + TABLE_TITLE;
+        SQLiteDatabase db = this.getReadableDatabase();
 
-        Log.w("deleteById", sqlDelete);
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(sqlQuery, null);
+        }
 
-        db.execSQL(sqlDelete);
-        db.close();
+        return cursor;
     }
 
     public void updateByID(int id, String title, String note) {
@@ -78,46 +77,24 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<Note> selectAll() {
-        String sqlQuery = "select * from " + TABLE_TITLE;
-
+    public void deleteById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(sqlQuery, null);
+        String sqlDelete = "delete from " + TABLE_TITLE;
+        sqlDelete += " where " + ID + " = " + id;
 
-        ArrayList<Note> notes = new ArrayList<Note>();
-        while(cursor.moveToNext() ) {
-            Note currentNote = new Note(cursor.getString(0), cursor.getString(1));
-            notes.add(currentNote);
-        }
+        Log.w("deleteById", sqlDelete);
 
+        db.execSQL(sqlDelete);
         db.close();
-        return notes;
     }
 
-    public Cursor readAll() {
-        String sqlQuery = "select * from " + TABLE_TITLE;
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = null;
-        if(db != null) {
-            cursor = db.rawQuery(sqlQuery, null);
-        }
-
-        return cursor;
-    }
-
-    public Note selectById(int id) {
-        String sqlQuery = "select * from " + TABLE_TITLE;
-        sqlQuery += " where " + ID + " = " + id;
-
-
+    public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(sqlQuery, null);
+        String sqlDeleteAll = "delete * from " + TABLE_TITLE;
 
-        Note note = null;
-        if(cursor.moveToFirst())
-            note = new Note(cursor.getString(0), cursor.getString(1));
+        Log.w("deleteAll", sqlDeleteAll);
 
-        return note;
+        db.execSQL(sqlDeleteAll);
+        db.close();
     }
 }

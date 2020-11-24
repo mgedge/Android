@@ -25,6 +25,11 @@
             android:name=".CreateNoteActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"/>
+
+        <activity
+            android:name=".UpdateNoteActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"/>
     </application>
 
 </manifest>

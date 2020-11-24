@@ -46,6 +46,10 @@ public class CreateNoteActivity extends AppCompatActivity {
             case R.id.menu_save:
                 insert();
                 break;
+            case android.R.id.home:
+                setResult(RESULT_CANCELED);
+                finish();
+                break;
             default:
                 break;
         }
@@ -57,10 +61,11 @@ public class CreateNoteActivity extends AppCompatActivity {
         String title = titleEditText.getText().toString();
         String notet = noteEditText.getText().toString();
 
-        Note note = new Note(title, notet);
+        Note note = new Note(null, title, notet);
         dbManager.insert(note);
 
         Toast.makeText(this, "Note successfully added!", Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
         finish();
     }
 }

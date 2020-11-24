@@ -1,8 +1,10 @@
 package edu.csi.niu.z1818828.assignment8_sqlite;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -11,9 +13,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class UpdateNoteActivity extends AppCompatActivity {
+    private static final String TAG = "UpdateNoteActivity";
     private DatabaseManager dbManager;
     private EditText titleEditText;
     private EditText noteEditText;
+    String title;
+    String desc;
+    String index;
+    int id = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +28,24 @@ public class UpdateNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_note);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
         dbManager = new DatabaseManager(this);
 
+        title = getIntent().getStringExtra("TITLE");
+        desc = getIntent().getStringExtra("NOTE");
+        index = getIntent().getStringExtra("INDEX");
+        try {
+            id = Integer.parseInt(index);
+        } catch(NumberFormatException nfe) {
+            Toast.makeText(this, "INVALID ID!", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onCreate: Invalid id");
+        }
+
         titleEditText = findViewById(R.id.editTextTextTitle);
+        titleEditText.setText(title);
         noteEditText = findViewById(R.id.editTextTextMultiLineNote);
+        noteEditText.setText(desc);
 
         titleEditText.requestFocus();
     }
@@ -47,6 +67,10 @@ public class UpdateNoteActivity extends AppCompatActivity {
             case R.id.menu_delete:
                 delete();
                 break;
+            case android.R.id.home:
+                setResult(RESULT_CANCELED);
+                finish();
+                break;
             default:
                 break;
         }
@@ -56,19 +80,25 @@ public class UpdateNoteActivity extends AppCompatActivity {
 
     public void update() {
         String title = titleEditText.getText().toString();
-        String notet = noteEditText.getText().toString();
+        String note = noteEditText.getText().toString();
 
-        Note note = new Note(title, notet);
-        dbManager.insert(note);
+        dbManager.updateByID(id, title, note);
 
-        Toast.makeText(this, "Note successfully added!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Note successfully updated!", Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
         finish();
     }
 
     public void delete() {
-        dbManager.deleteById(1); //TODO change to match the calling card Pos
+        if(id != -1)
+            dbManager.deleteById(id);
+        else {
+            Toast.makeText(this, "Cannot delete this note!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Toast.makeText(this, "Note successfully deleted!", Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
         finish();
     }
 }
