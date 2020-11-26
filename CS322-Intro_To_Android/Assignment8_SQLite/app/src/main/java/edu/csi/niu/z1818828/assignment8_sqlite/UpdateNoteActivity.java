@@ -1,10 +1,22 @@
+/************************************************************************
+ *                                                                      *
+ * CSCI 322/522  			  Assignment 8               		 FA2020 *
+ *                                                            		    *
+ * 	Class Name: UpdateNoteActivity.java									*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *   Due Date: 4 December 2020							    			*
+ *   																	*
+ *    Purpose: This activity is allows the user to update or delete a   *
+ *    note and update it in the database.
+ *																		*
+ * *********************************************************************/
 package edu.csi.niu.z1818828.assignment8_sqlite;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,27 +38,32 @@ public class UpdateNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
+
+        //Set the actionbar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        //link the database
         dbManager = new DatabaseManager(this);
 
+        //get the previous texts
         title = getIntent().getStringExtra("TITLE");
         desc = getIntent().getStringExtra("NOTE");
         index = getIntent().getStringExtra("INDEX");
         try {
             id = Integer.parseInt(index);
-        } catch(NumberFormatException nfe) {
-            Toast.makeText(this, "INVALID ID!", Toast.LENGTH_SHORT).show();
+        } catch (NumberFormatException nfe) {
             Log.d(TAG, "onCreate: Invalid id");
         }
 
+        //get and set the texts
         titleEditText = findViewById(R.id.editTextTextTitle);
         titleEditText.setText(title);
         noteEditText = findViewById(R.id.editTextTextMultiLineNote);
         noteEditText.setText(desc);
 
+        //set the focus on title
         titleEditText.requestFocus();
     }
 
@@ -60,7 +77,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        switch(id) {
+        switch (id) {
             case R.id.menu_save:
                 update();
                 break;
@@ -78,6 +95,9 @@ public class UpdateNoteActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * update the database entry for the id provided using the screen input
+     */
     public void update() {
         String title = titleEditText.getText().toString();
         String note = noteEditText.getText().toString();
@@ -89,11 +109,15 @@ public class UpdateNoteActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * delete the database entry for the id provided
+     */
     public void delete() {
-        if(id != -1)
+        if (id != -1)
             dbManager.deleteById(id);
         else {
             Toast.makeText(this, "Cannot delete this note!", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onCreate: Invalid id, cannot delete note");
             return;
         }
 

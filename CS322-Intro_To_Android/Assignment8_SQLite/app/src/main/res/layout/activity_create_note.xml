@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/AppTheme"
     tools:context=".CreateNoteActivity">
 
     <EditText
@@ -15,10 +16,13 @@
         android:layout_marginEnd="16dp"
         android:background="@null"
         android:ems="10"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:hint="Title"
         android:inputType="textCapWords"
         android:selectAllOnFocus="true"
         android:singleLine="true"
+        android:textColorLink="@color/colorSecondary"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +43,7 @@
         android:inputType="textMultiLine|textCapSentences"
         android:singleLine="false"
         android:textAllCaps="false"
+        android:textColorLink="@color/colorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

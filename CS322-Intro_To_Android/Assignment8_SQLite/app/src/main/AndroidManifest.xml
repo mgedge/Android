@@ -9,27 +9,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment8_SQLite">
-
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar" >
-
+            android:name=".SplashActivity"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".CreateNoteActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"/>
-
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar" />
         <activity
             android:name=".UpdateNoteActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"/>
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar" />
     </application>
 
 </manifest>

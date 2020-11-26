@@ -1,17 +1,25 @@
+/************************************************************************
+ *                                                                      *
+ * CSCI 322/522  			  Assignment 8               		 FA2020 *
+ *                                                            		    *
+ * 	Class Name: Note.java							            		*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *   Due Date: 4 December 2020							    			*
+ *   																	*
+ *    Purpose: This java class is the note object. It contains the      *
+ *    the constructors and gets/sets for its data types                 *
+ *																		*
+ * *********************************************************************/
 package edu.csi.niu.z1818828.assignment8_sqlite;
 
 public class Note {
     private String id;
     private String title;
     private String note;
-    private boolean selected = false;
 
-    public Note() {
-        id = null;
-        title = null;
-        note = null;
-        selected = false;
-    }
+    //this variable is used to determine if it is selected in the recycler view
+    private boolean selected = false;
 
     public Note(String id, String title, String note) {
         this.id = id;
