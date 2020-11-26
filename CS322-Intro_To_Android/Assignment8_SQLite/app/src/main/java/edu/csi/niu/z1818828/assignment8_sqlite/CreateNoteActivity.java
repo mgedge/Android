@@ -36,6 +36,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         //setup action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Add Note");
 
         //link the database
         dbManager = new DatabaseManager(this);

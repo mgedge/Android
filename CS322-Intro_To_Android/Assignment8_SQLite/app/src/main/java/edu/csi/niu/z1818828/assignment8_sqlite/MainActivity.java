@@ -81,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
         //Get the data from database
         storeData();
 
+        //Update nonotes
+        updateNoNotes();
+
         //FAB listener
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {

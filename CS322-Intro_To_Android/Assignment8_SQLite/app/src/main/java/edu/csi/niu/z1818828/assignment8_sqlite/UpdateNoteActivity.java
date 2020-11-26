@@ -43,6 +43,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setTitle("Update Note");
 
         //link the database
         dbManager = new DatabaseManager(this);

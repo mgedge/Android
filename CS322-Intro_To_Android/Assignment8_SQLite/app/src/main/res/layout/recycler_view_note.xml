@@ -47,10 +47,8 @@
 
         <CheckBox
             android:id="@+id/checkBoxNote"
-            style="@style/Button.Red"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="#FF0000"
             android:checked="false"
             android:textColorHighlight="#A50202"
             android:textColorLink="@color/red"
