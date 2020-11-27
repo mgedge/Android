@@ -32,6 +32,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
     String title;
     String desc;
     String index;
+    boolean checked;
     int id = -1;
 
     @Override
@@ -51,6 +52,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
         //get the previous texts
         title = getIntent().getStringExtra("TITLE");
         desc = getIntent().getStringExtra("NOTE");
+        checked = getIntent().getBooleanExtra("CHECKED", false);
         index = getIntent().getStringExtra("INDEX");
         try {
             id = Integer.parseInt(index);
@@ -103,7 +105,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
         String title = titleEditText.getText().toString();
         String note = noteEditText.getText().toString();
 
-        dbManager.updateByID(id, title, note);
+        dbManager.updateByID(id, title, note, checked);
 
         Toast.makeText(this, "Note successfully updated!", Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);

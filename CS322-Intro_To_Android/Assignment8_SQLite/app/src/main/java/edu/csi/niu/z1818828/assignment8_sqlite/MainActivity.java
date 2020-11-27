@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int UPDATE_NOTE = 2;
     private TextView noNotes;
     private TextView appDesc;
-    private DatabaseManager dbManager;
+    protected static DatabaseManager dbManager;
     private notesLayoutAdapter adapter;
     private ActionMode actionMode;
     protected ArrayList<Note> notes = new ArrayList<>();
@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("INDEX", note.getId());
                     intent.putExtra("TITLE", note.getTitle());
                     intent.putExtra("NOTE", note.getNote());
+                    intent.putExtra("CHECKED", note.isChecked());
                     startActivityForResult(intent, UPDATE_NOTE);
                 }
             }
@@ -120,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onSelection(boolean b) {
-
+            public void updateCheck(Note note, boolean checked) {
+                dbManager.updateByID(Integer.parseInt(note.getId()), note.getTitle(), note.getNote(), checked);
             }
         });
     }
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
                 Note note = new Note(cursor.getString(0), cursor.getString(1),
-                        cursor.getString(2));
+                        cursor.getString(2), Boolean.parseBoolean(cursor.getString(3)));
                 notes.add(note);
             }
         }
@@ -215,19 +216,19 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "clearData and deleteAll failed");
         }
 
-        Note note = new Note(null, "Test 1", "This is text for note 1");
+        Note note = new Note(null, "Test 1", "This is text for note 1", true);
         dbManager.insert(note);
 
-        note = new Note(null, "Test 2", "This is text for note 2");
+        note = new Note(null, "Test 2", "This is text for note 2", false);
         dbManager.insert(note);
 
-        note = new Note(null, "Test 3", "This is text for note 3");
+        note = new Note(null, "Test 3", "This is text for note 3", false);
         dbManager.insert(note);
 
-        note = new Note(null, "Test 4", "This is text for note 4");
+        note = new Note(null, "Test 4", "This is text for note 4", false);
         dbManager.insert(note);
 
-        note = new Note(null, "Test 5", "This is text for note 5");
+        note = new Note(null, "Test 5", "This is text for note 5", false);
         dbManager.insert(note);
     }
 

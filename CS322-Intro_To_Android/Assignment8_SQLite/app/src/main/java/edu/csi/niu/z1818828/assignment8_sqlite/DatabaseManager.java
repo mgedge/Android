@@ -24,9 +24,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "noteDB";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_TITLE = "note";
-    private static final String ID = "id ";
+    private static final String ID = "id";
     private static final String TITLE = "title";
     private static final String NOTE = "note";
+    private static final String CHECKED = "checked";
 
     public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,7 +37,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sqlCreate = "create table " + TABLE_TITLE + " ( " + ID;
         sqlCreate += " integer primary key autoincrement, " + TITLE;
-        sqlCreate += " text, " + NOTE + " longtext )";
+        sqlCreate += " text, " + NOTE + " longtext, " + CHECKED + " boolean )";
 
         Log.w("onCreate", sqlCreate);
 
@@ -63,7 +64,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_TITLE;
         sqlInsert += " values(null, '" + note.getTitle();
-        sqlInsert += "', '" + note.getNote() + "' )";
+        sqlInsert += "', '" + note.getNote() + "', '" + false + "' )";
 
         Log.w("insert", sqlInsert);
 
@@ -95,11 +96,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
      * @param title the new title field
      * @param note  the new note field
      */
-    public void updateByID(int id, String title, String note) {
+    public void updateByID(int id, String title, String note, Boolean checked) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlUpdate = "update " + TABLE_TITLE;
         sqlUpdate += " set " + TITLE + " = '" + title + "', ";
-        sqlUpdate += NOTE + " = '" + note + "'";
+        sqlUpdate += NOTE + " = '" + note + "', ";
+        sqlUpdate += CHECKED + " = '" + checked + "'";
         sqlUpdate += " where " + ID + " = " + id;
 
         Log.w("updateByID", sqlUpdate);

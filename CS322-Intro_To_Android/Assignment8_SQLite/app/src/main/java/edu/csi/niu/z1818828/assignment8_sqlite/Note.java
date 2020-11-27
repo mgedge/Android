@@ -18,13 +18,16 @@ public class Note {
     private String title;
     private String note;
 
+
     //this variable is used to determine if it is selected in the recycler view
     private boolean selected = false;
+    private boolean checked = false;
 
-    public Note(String id, String title, String note) {
+    public Note(String id, String title, String note, Boolean checked) {
         this.id = id;
         this.title = title;
         this.note = note;
+        this.checked = checked;
     }
 
     public String getId() {
@@ -57,5 +60,13 @@ public class Note {
 
     public boolean isSelected() {
         return selected;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

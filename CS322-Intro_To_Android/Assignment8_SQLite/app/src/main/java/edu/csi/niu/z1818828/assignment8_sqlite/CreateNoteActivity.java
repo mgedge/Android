@@ -83,7 +83,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         String title = titleEditText.getText().toString();
         String desc = noteEditText.getText().toString();
 
-        Note note = new Note(null, title, desc);
+        Note note = new Note(null, title, desc, false);
         dbManager.insert(note);
 
         Toast.makeText(this, "Note successfully added!", Toast.LENGTH_SHORT).show();

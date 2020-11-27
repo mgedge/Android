@@ -20,6 +20,8 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -193,12 +195,13 @@ public class notesLayoutAdapter extends RecyclerView.Adapter<notesLayoutAdapter.
 
         void onNoteLongClick(int position);
 
-        void onSelection(boolean isSelected);
+        void updateCheck(Note note, boolean checked);
     }
 
     public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView title;
         private final TextView desc;
+        private final CheckBox checked;
         private final CardView cardView;
         OnNoteClickListener clickListener;
 
@@ -206,6 +209,7 @@ public class notesLayoutAdapter extends RecyclerView.Adapter<notesLayoutAdapter.
             super(v);
             title = v.findViewById(R.id.textviewTitle);
             desc = v.findViewById(R.id.textViewNote);
+            checked = v.findViewById(R.id.checkBoxNote);
             cardView = v.findViewById(R.id.cardView_note);
             this.clickListener = clickListener;
             v.setOnClickListener(this);
@@ -218,8 +222,10 @@ public class notesLayoutAdapter extends RecyclerView.Adapter<notesLayoutAdapter.
          * @param position the position of the note in the adapter
          */
         void bind(Note note, int position) {
+            Log.d(TAG, "Position: " + position + " checked: " + note.isChecked());
             title.setText((note.getTitle()));
             desc.setText((note.getNote()));
+            checked.setChecked(note.isChecked());
 
             //Set the selected/nonselected background
             if (note.isSelected()) {
@@ -228,23 +234,31 @@ public class notesLayoutAdapter extends RecyclerView.Adapter<notesLayoutAdapter.
                 cardView.setBackgroundResource(R.drawable.note_background);
             }
 
+            //Checked listener
+            checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Log.d(TAG, "Position: " + position + " checked: " + note.isChecked() + " to " + isChecked);
+                    if (note.isChecked() != isChecked) {
+                        note.setChecked(isChecked);
+                        listener.updateCheck(note, note.isChecked());
+                    }
+                }
+            });
+
             //Set the boolean value for any selection enable to true
             bSelectionGroup = getSelectedSize() > 0;
 
             //Change view on long click
             itemView.setOnLongClickListener(v -> {
-                Log.w(TAG, "onLongClick: pressed: " + position + " selected: " + note.isSelected() + " sparseBool: " + selectedItems.get(position));
+                Log.d(TAG, "onLongClick: pressed: " + position + " selected: " + note.isSelected() + " sparseBool: " + selectedItems.get(position));
 
                 toggleSelection(position);
 
                 if (note.isSelected()) {
                     cardView.setBackgroundResource(R.drawable.note_background);
-                    if (getSelectedNotes().size() == 0) {
-                        listener.onSelection(false);
-                    }
                 } else {
                     cardView.setBackgroundResource(R.drawable.note_background_selected);
-                    listener.onSelection(true);
                 }
 
                 notifyDataSetChanged();

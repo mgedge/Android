@@ -12,7 +12,7 @@
     <color name="black">#FF000000</color>
     <color name="gray">#48494B</color>
     <color name="shadow">#363636</color>
-    <color name="darkShadow">#292929</color>
+    <color name="darkShadow">#3C3F41</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="red_check" style="@drawable/check_box_selector" />
