@@ -6,5 +6,9 @@
         android:id="@+id/menu_selectall"
         android:icon="@drawable/ic_baseline_select_all_24"
         app:showAsAction="always"
-        android:title="selectAll" />
+        android:title="Select All" />
+    <item
+        android:id="@+id/menu_deletaall"
+        android:title="Delete All"
+        app:showAsAction="never" />
 </menu>

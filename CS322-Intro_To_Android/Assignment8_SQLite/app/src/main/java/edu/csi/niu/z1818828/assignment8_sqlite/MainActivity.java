@@ -145,6 +145,11 @@ public class MainActivity extends AppCompatActivity {
                 adapter.selectAll();
                 enableActionMode(-1);
             }
+        } else if (id == R.id.menu_deletaall) {
+            clearData();
+            dbManager.deleteAll();
+            updateNoNotes();
+            adapter.notifyDataSetChanged();
         }
 
         return true;
