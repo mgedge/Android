@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private WeatherArrayAdapter weatherArrayAdapter;
     private ListView weatherListView;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        weatherListView = findViewById(R.id.weatherListView);
+        weatherListView = (ListView) findViewById(R.id.weatherListView);
         weatherArrayAdapter = new WeatherArrayAdapter(this, weatherList);
         weatherListView.setAdapter(weatherArrayAdapter);
 
@@ -49,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText locationEditText = findViewById(R.id.locationEditText);
+                EditText locationEditText = (EditText) findViewById(R.id.locationEditText);
                 URL url = createURL(locationEditText.getText().toString());
 
                 if(url != null) {
@@ -79,9 +77,8 @@ public class MainActivity extends AppCompatActivity {
         }
         catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
     private class GetWeatherTask extends AsyncTask<URL, Void, JSONObject> {
@@ -115,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
             catch (Exception e) {
                 Snackbar.make(findViewById(R.id.coordinatorLayout), R.string.connect_error, Snackbar.LENGTH_LONG).show();
+                e.printStackTrace();
             }
             finally {
                 connection.disconnect();
@@ -144,8 +142,8 @@ public class MainActivity extends AppCompatActivity {
 
                     weatherList.add(new Weather(
                             day.getLong("dt"),
-                            temperatures.getDouble("min"),
-                            temperatures.getDouble("max"),
+                            temperatures.getDouble("temp_min"),
+                            temperatures.getDouble("temp_max"),
                             day.getDouble("humidity"),
                             weather.getString("description"),
                             weather.getString("icon")));
@@ -156,27 +154,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }
