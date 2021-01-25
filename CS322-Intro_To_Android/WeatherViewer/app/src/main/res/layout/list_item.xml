@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/conditionImageView"
         android:layout_width="@dimen/image_side_length"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:contentDescription="@string/weather_condition_image"
         android:scaleType="fitCenter"
         tools:srcCompat="@tools:sample/avatars" />

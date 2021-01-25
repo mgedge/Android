@@ -1,3 +1,5 @@
+//WeatherArrayAdapter.java
+// An ArrayAdapter for displaying a List<Weather>'s elements in a ListView
 package edu.csi.niu.z1818828.weatherviewer;
 
 import android.content.Context;
