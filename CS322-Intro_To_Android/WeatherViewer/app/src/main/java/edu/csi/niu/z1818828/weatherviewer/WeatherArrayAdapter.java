@@ -35,11 +35,19 @@ public class WeatherArrayAdapter extends ArrayAdapter<Weather> {
         super(context, -1, forecast);
     }
 
+    /**
+     * Get the view for the specific day of the week
+     *
+     * @param position    - the integer position in the array
+     * @param convertView - the view to be built
+     * @param parent      - parent of the viewgroup
+     * @return the view of the day of the week
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
         Weather day = getItem(position);
         ViewHolder viewHolder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             viewHolder = new ViewHolder();
 
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -52,15 +60,13 @@ public class WeatherArrayAdapter extends ArrayAdapter<Weather> {
             viewHolder.hiTextView = (TextView) convertView.findViewById(R.id.hiTextView);
             viewHolder.humidityTextView = (TextView) convertView.findViewById(R.id.humidityTextView);
             convertView.setTag(viewHolder);
-        }
-        else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         if(bitmaps.containsKey(day.iconURL)) {
             viewHolder.conditionImageView.setImageBitmap(bitmaps.get(day.iconURL));
-        }
-        else {
+        } else {
             new LoadImageTask(viewHolder.conditionImageView).execute(day.iconURL);
         }
 
@@ -74,6 +80,10 @@ public class WeatherArrayAdapter extends ArrayAdapter<Weather> {
         return convertView;
     }
 
+    /**
+     * Background process to download the icon for the forecast if it does not exist
+     * then set it
+     */
     private class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
         private ImageView imageView;
 
@@ -94,15 +104,12 @@ public class WeatherArrayAdapter extends ArrayAdapter<Weather> {
                 try (InputStream inputStream = connection.getInputStream()) {
                     bitmap = BitmapFactory.decodeStream(inputStream);
                     bitmaps.put(params[0], bitmap);
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 connection.disconnect();
             }
 

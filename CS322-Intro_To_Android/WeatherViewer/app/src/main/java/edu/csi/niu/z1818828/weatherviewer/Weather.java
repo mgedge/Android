@@ -15,6 +15,16 @@ public class Weather {
     public final String description;
     public final String iconURL;
 
+    /**
+     * Weather object to store the weather for a particular day
+     *
+     * @param timeStamp   - time of the weather
+     * @param minTemp     - the minimum temperature of the day
+     * @param maxTemp     - the maximum temperature of the day
+     * @param humidity    - the humidity of the day expressed as a decimal
+     * @param description - brief description of the forecast
+     * @param iconName    - the url code for the weather icon
+     */
     public Weather(long timeStamp, double minTemp, double maxTemp,
                    double humidity, String description, String iconName) {
         NumberFormat numberFormat = NumberFormat.getInstance();
@@ -30,8 +40,14 @@ public class Weather {
         this.iconURL = "https://openweathermap.org/img/w/" + iconName + ".png";
     }
 
+    /**
+     * Method converts the timestamp to a weekday
+     *
+     * @param timeStamp - the timestamp of the weather forecast
+     * @return a string for the day of the week corresponding with the time stamp
+     */
     private static String convertTimeStampToDay(long timeStamp) {
-        Calendar calendar= Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeStamp * 1000);
         TimeZone timeZone = TimeZone.getDefault();
 

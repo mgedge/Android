@@ -1,6 +1,16 @@
-// MainActivity.java
-// Z1818828 - Matthew Gedge
-// Maintains the interaction between the UI and API calls
+/************************************************************************
+ *                                                                      *
+ * CSCI 428       			  Assignment 1               		 SP2021 *
+ *                                                            		    *
+ * 	Class Name: MainActivity.java		    							*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *   Due Date: 29 January 2021							    			*
+ *   																	*
+ *    Purpose: This activity maintains the interaction between the UI   *
+ *    and API calls                                                     *
+ *																		*
+ * *********************************************************************/
 
 package edu.csi.niu.z1818828.weatherviewer;
 
@@ -60,19 +70,28 @@ public class MainActivity extends AppCompatActivity {
                     dismissKeyboard(locationEditText);
                     GetLocationTask getLocationTask = new GetLocationTask();
                     getLocationTask.execute(coordinates);
-                }
-                else {
+                } else {
                     Snackbar.make(findViewById(R.id.coordinatorLayout), R.string.invalid_url, Snackbar.LENGTH_LONG).show();
                 }
             }
         });
     }
 
+    /**
+     * Hides the keyboard from the view programmatically
+     *
+     * @param view
+     */
     private void dismissKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    /**
+     * @param lat - the latitude of the location to be called
+     * @param lng - the longitude of the location to be called
+     * @return an https URL link for the api call
+     */
     private URL createURL(String lat, String lng) {
         String apiKey = getString(R.string.api_key);
         String baseUrl = getString(R.string.web_service_url);
@@ -87,6 +106,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @param city - the city to be converted to longitude/latitude
+     * @return an https URL link to get the coordinates
+     */
     private URL coordinatesURL(String city) {
         // Create the variables
         String apiKey = getString(R.string.geocodio_api);
@@ -96,13 +119,15 @@ public class MainActivity extends AppCompatActivity {
             // Then create the url given the location
             String urlString = url + URLEncoder.encode(city, "UTF-8") + "&api_key=" + apiKey;
             return new URL(urlString);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
+    /**
+     * Class to get weather data from the openweathermap API using coordinates
+     */
     private class GetWeatherTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... params) {
@@ -152,9 +177,10 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONArray list = forecast.getJSONArray("daily");
 
+                //Iterate through the entire JSON array
                 for (int i = 0; i < list.length(); i++) {
+                    //Parse the JSON object
                     JSONObject day = list.getJSONObject(i);
-
                     JSONObject temperatures = day.getJSONObject("temp");
                     JSONObject weather = day.getJSONArray("weather").getJSONObject(0);
 
@@ -172,6 +198,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This class calls the geocodio API to get the coordinates.
+     * The addresses are restricted to US and Canada.
+     * https://www.geocod.io/
+     */
     private class GetLocationTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... params) {
@@ -217,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
             lat = coordinatesObj.getLat();
             lng = coordinatesObj.getLng();
 
+            //Create the link and execute the API call
             URL url = createURL(lat, lng);
             if (url != null) {
                 GetWeatherTask getLocalWeatherTask = new GetWeatherTask();
@@ -229,17 +261,17 @@ public class MainActivity extends AppCompatActivity {
         private void convertJSONtoCoordinates(JSONObject location) {
             //Retrieve the coordinates from the JSON object
             try {
+                //Parse the JSON object
                 JSONArray list = location.getJSONArray("results");
                 JSONObject day = list.getJSONObject(0);
                 JSONObject coordinates = day.getJSONObject("location");
 
+                //Set the object coordinates
                 coordinatesObj.setLat(coordinates.getDouble("lat"));
                 coordinatesObj.setLng(coordinates.getDouble("lng"));
-            }
-            catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Could not convert coordinates!");
                 return;
