@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 //Deal two cards to the player
                 playerStack.add(cards[deckStack]);
                 playerScore += evaluateCardScore(cards[deckStack].rank);
+
                 deckStack++;
                 playerStack.add(cards[deckStack]);
                 playerScore += evaluateCardScore(cards[deckStack].rank);
