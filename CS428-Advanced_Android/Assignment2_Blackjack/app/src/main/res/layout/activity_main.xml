@@ -121,244 +121,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageViewDCard1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listViewDealer"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:visibility="invisible"
+        android:layout_marginEnd="8dp"
+        android:isScrollContainer="false"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDealerScore"
-        app:srcCompat="@drawable/cardback" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDealerScore" />
 
-    <ImageView
-        android:id="@+id/imageViewDCard2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="2dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewDCard1"
-        app:layout_constraintStart_toStartOf="@+id/imageViewDCard1"
-        app:layout_constraintTop_toTopOf="@+id/imageViewDCard1"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewDCard3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="3dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewDCard2"
-        app:layout_constraintStart_toStartOf="@+id/imageViewDCard2"
-        app:layout_constraintTop_toTopOf="@+id/imageViewDCard2"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewDCard4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="4dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewDCard3"
-        app:layout_constraintStart_toStartOf="@+id/imageViewDCard3"
-        app:layout_constraintTop_toTopOf="@+id/imageViewDCard3"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewPCard5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewDCard4"
-        app:layout_constraintStart_toStartOf="@+id/imageViewDCard4"
-        app:layout_constraintTop_toTopOf="@+id/imageViewDCard4"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewDCard6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="6dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewPCard5"
-        app:layout_constraintStart_toStartOf="@+id/imageViewPCard5"
-        app:layout_constraintTop_toTopOf="@+id/imageViewPCard5"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewDCard7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="7dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewDCard6"
-        app:layout_constraintStart_toStartOf="@+id/imageViewDCard6"
-        app:layout_constraintTop_toTopOf="@+id/imageViewDCard6"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewPCard8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="8dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewDCard7"
-        app:layout_constraintStart_toStartOf="@+id/imageViewDCard7"
-        app:layout_constraintTop_toTopOf="@+id/imageViewDCard7"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewDCard9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="9dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewPCard8"
-        app:layout_constraintStart_toStartOf="@+id/imageViewPCard8"
-        app:layout_constraintTop_toTopOf="@+id/imageViewPCard8"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewDCard10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="10dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewDCard9"
-        app:layout_constraintStart_toStartOf="@+id/imageViewDCard9"
-        app:layout_constraintTop_toTopOf="@+id/imageViewDCard9"
-        app:srcCompat="@drawable/cardback" />
-
-    <!-- PLAYER CARDS -->
-    <ImageView
-        android:id="@+id/imageViewPCard1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listViewPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:visibility="invisible"
+        android:layout_marginEnd="8dp"
+        android:isScrollContainer="false"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPlayerScore"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewPCard2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="2dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewPCard1"
-        app:layout_constraintStart_toStartOf="@+id/imageViewPCard1"
-        app:layout_constraintTop_toTopOf="@+id/imageViewPCard1"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewPCard3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="3dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewPCard2"
-        app:layout_constraintStart_toStartOf="@+id/imageViewPCard2"
-        app:layout_constraintTop_toTopOf="@+id/imageViewPCard2"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewPCard4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="4dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewPCard3"
-        app:layout_constraintStart_toStartOf="@+id/imageViewPCard3"
-        app:layout_constraintTop_toTopOf="@+id/imageViewPCard3"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewDCard5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewPCard4"
-        app:layout_constraintStart_toStartOf="@+id/imageViewPCard4"
-        app:layout_constraintTop_toTopOf="@+id/imageViewPCard4"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewPCard6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="6dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewDCard5"
-        app:layout_constraintStart_toStartOf="@+id/imageViewDCard5"
-        app:layout_constraintTop_toTopOf="@+id/imageViewDCard5"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewPCard7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="7dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewPCard6"
-        app:layout_constraintStart_toStartOf="@+id/imageViewPCard6"
-        app:layout_constraintTop_toTopOf="@+id/imageViewPCard6"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewDCard8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="8dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewPCard7"
-        app:layout_constraintStart_toStartOf="@+id/imageViewPCard7"
-        app:layout_constraintTop_toTopOf="@+id/imageViewPCard7"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewPCard9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="9dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewDCard8"
-        app:layout_constraintStart_toStartOf="@+id/imageViewDCard8"
-        app:layout_constraintTop_toTopOf="@+id/imageViewDCard8"
-        app:srcCompat="@drawable/cardback" />
-
-    <ImageView
-        android:id="@+id/imageViewPCard100"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:elevation="10dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewPCard9"
-        app:layout_constraintStart_toStartOf="@+id/imageViewPCard9"
-        app:layout_constraintTop_toTopOf="@+id/imageViewPCard9"
-        app:srcCompat="@drawable/cardback" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPlayerScore" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
