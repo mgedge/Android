@@ -14,7 +14,7 @@
         android:id="@+id/textViewDealerScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="32dp"
         android:text="21"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -96,19 +96,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/blackjack" />
 
-    <TextView
-        android:id="@+id/textViewDebugCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="sample text"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/buttonDeal"
         android:layout_width="wrap_content"
@@ -128,7 +115,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:isScrollContainer="false"
+        android:isScrollContainer="true"
         android:layoutDirection="ltr"
         android:orientation="horizontal"
         android:scrollbars="none"
@@ -143,7 +130,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:isScrollContainer="false"
+        android:isScrollContainer="true"
         android:layoutDirection="ltr"
         android:orientation="horizontal"
         android:scrollbars="none"
