@@ -62,6 +62,56 @@
         app:layout_constraintStart_toEndOf="@+id/textViewPlayerScore"
         app:layout_constraintTop_toTopOf="@+id/textViewPlayerScore" />
 
+    <TextView
+        android:id="@+id/textViewBet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Bet"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPlayer"
+        app:layout_constraintEnd_toStartOf="@+id/textViewBetAmount"
+        app:layout_constraintStart_toStartOf="@+id/textViewPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCash"
+        app:layout_constraintVertical_bias="0.53" />
+
+    <TextView
+        android:id="@+id/textViewBetAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="$####"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewBet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewBet" />
+
+    <TextView
+        android:id="@+id/textViewCash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="8dp"
+        android:text="Cash"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewCashAmount"
+        app:layout_constraintTop_toBottomOf="@+id/listViewDealer" />
+
+    <TextView
+        android:id="@+id/textViewCashAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="$####"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCash"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewCash" />
+
     <Button
         android:id="@+id/buttonHit"
         android:layout_width="wrap_content"
@@ -86,14 +136,18 @@
 
     <ImageView
         android:id="@+id/imageViewGameStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#80615858"
         android:clickable="false"
-        android:visibility="invisible"
+        android:elevation="10dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/blackjack" />
 
     <Button
@@ -111,12 +165,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listViewDealer"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:isScrollContainer="true"
+        android:layoutAnimation="@anim/layout_animation"
         android:layoutDirection="ltr"
+        android:nestedScrollingEnabled="true"
         android:orientation="horizontal"
         android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,17 +182,153 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listViewPlayer"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="154dp"
         android:isScrollContainer="true"
+        android:layoutAnimation="@anim/layout_animation"
         android:layoutDirection="ltr"
+        android:nestedScrollingEnabled="true"
         android:orientation="horizontal"
         android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPlayerScore" />
+
+    <Button
+        android:id="@+id/buttonBlueChip"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/chip_blue"
+        android:focusable="false"
+        android:foreground="@drawable/chip_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewDealer" />
+
+    <Button
+        android:id="@+id/buttonBlackChip"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/chip_black"
+        android:focusable="false"
+        android:foreground="@drawable/chip_black"
+        app:layout_constraintBottom_toTopOf="@+id/listViewPlayer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBlueChip"
+        app:layout_constraintVertical_bias="0.22000003" />
+
+    <Button
+        android:id="@+id/buttonRedChip"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/chip_red"
+        android:focusable="false"
+        android:foreground="@drawable/chip_red"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPlayerScore"
+        app:layout_constraintStart_toEndOf="@+id/buttonBlackChip"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGreenChip"
+        app:layout_constraintVertical_bias="0.050000012" />
+
+    <Button
+        android:id="@+id/buttonGreenChip"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/chip_green"
+        android:focusable="false"
+        android:foreground="@drawable/chip_green"
+        app:layout_constraintStart_toEndOf="@+id/buttonBlueChip"
+        app:layout_constraintTop_toBottomOf="@+id/listViewDealer" />
+
+    <TextView
+        android:id="@+id/textViewBlueChip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:text="$1"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonBlueChip"
+        app:layout_constraintEnd_toEndOf="@+id/buttonBlueChip"
+        app:layout_constraintStart_toStartOf="@+id/buttonBlueChip"
+        app:layout_constraintTop_toTopOf="@+id/buttonBlueChip" />
+
+    <TextView
+        android:id="@+id/textViewRedChip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:text="$100"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonRedChip"
+        app:layout_constraintEnd_toEndOf="@+id/buttonRedChip"
+        app:layout_constraintStart_toStartOf="@+id/buttonRedChip"
+        app:layout_constraintTop_toTopOf="@+id/buttonRedChip" />
+
+    <TextView
+        android:id="@+id/textViewGreenChip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:text="$10"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonGreenChip"
+        app:layout_constraintEnd_toEndOf="@+id/buttonGreenChip"
+        app:layout_constraintStart_toStartOf="@+id/buttonGreenChip"
+        app:layout_constraintTop_toTopOf="@+id/buttonGreenChip" />
+
+    <TextView
+        android:id="@+id/textViewBlackChip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:text="$1000"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonBlackChip"
+        app:layout_constraintEnd_toEndOf="@+id/buttonBlackChip"
+        app:layout_constraintStart_toStartOf="@+id/buttonBlackChip"
+        app:layout_constraintTop_toTopOf="@+id/buttonBlackChip" />
+
+    <Button
+        android:id="@+id/buttonNewGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="New Round"
+        android:elevation="200dp"
+        app:backgroundTint="#E53935"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewPlaceBets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="145dp"
+        android:text="Place your bets!"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
