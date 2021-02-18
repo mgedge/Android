@@ -10,6 +10,19 @@
     android:focusableInTouchMode="true"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#A31111"
+        app:menu="@menu/menu_options"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Blackjack"
+        app:titleTextColor="@color/white" />
+
+
     <TextView
         android:id="@+id/textViewDealerScore"
         android:layout_width="wrap_content"
@@ -21,7 +34,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/textViewPlayerScore"
@@ -329,6 +342,53 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewNoMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You ran out of money!"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/buttonAddMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="(Add another $1000)"
+        app:layout_constraintEnd_toEndOf="@+id/textViewNoMoney"
+        app:layout_constraintStart_toStartOf="@+id/textViewNoMoney"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNoMoney" />
+
+    <Button
+        android:id="@+id/buttonDoubledown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Double down"
+        app:backgroundTint="#FFB300"
+        app:layout_constraintBottom_toTopOf="@+id/buttonHit"
+        app:layout_constraintEnd_toEndOf="@+id/buttonHit"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonSurrender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Surrender"
+        app:backgroundTint="#515151"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/buttonStand" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
