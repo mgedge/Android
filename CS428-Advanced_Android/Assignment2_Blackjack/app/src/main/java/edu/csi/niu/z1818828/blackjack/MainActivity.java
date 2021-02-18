@@ -1,3 +1,15 @@
+/************************************************************************
+ *                                                                      *
+ * CSCI 428       			  Assignment 2               		 SP2021 *
+ *                                                            		    *
+ * 	Class Name: MainActivity.java		    							*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *   Due Date: 18 February 2021							    			*
+ *   																	*
+ *    Purpose: This activity the game through the logic and UI          *
+ *																		*
+ * *********************************************************************/
 package edu.csi.niu.z1818828.blackjack;
 
 import android.content.Intent;

@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class fills the recycler views of the player and dealer with the card images
+ */
 public class CardArrayAdapter extends RecyclerView.Adapter<CardArrayAdapter.ViewHolder> {
     private Map<String, Bitmap> bitmaps = new HashMap<>();
     private LayoutInflater inflater;
@@ -64,6 +67,9 @@ public class CardArrayAdapter extends RecyclerView.Adapter<CardArrayAdapter.View
         }
     }
 
+    /**
+     * This method creates bitmaps for every card in a deck
+     */
     private void populateBitmap() {
         Bitmap bitmap = null;
         String id, value;
@@ -85,6 +91,13 @@ public class CardArrayAdapter extends RecyclerView.Adapter<CardArrayAdapter.View
         bitmaps.put(null, bitmap);
     }
 
+    /**
+     * This method determines the name of the card as a char/int pair
+     *
+     * @param suit the integer value of the suit
+     * @param rank the integer value of the rank
+     * @return a string for the suit/rank pair (i.e. "12c" which is queen of clubs)
+     */
     private String resolvePNG(int suit, int rank) {
         String cardName = null;
         String sut = null;
@@ -121,5 +134,4 @@ public class CardArrayAdapter extends RecyclerView.Adapter<CardArrayAdapter.View
 
         return cardName;
     }
-
 }

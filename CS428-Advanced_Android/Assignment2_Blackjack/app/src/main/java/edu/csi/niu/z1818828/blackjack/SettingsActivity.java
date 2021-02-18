@@ -6,6 +6,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
+/**
+ * This class handles the settings activity to modify the gameplay
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
