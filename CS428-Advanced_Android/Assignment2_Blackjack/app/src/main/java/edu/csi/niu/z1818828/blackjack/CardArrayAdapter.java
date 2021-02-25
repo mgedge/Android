@@ -1,3 +1,17 @@
+/************************************************************************
+ *                                                                      *
+ * CSCI 428       			  Assignment 2               		 SP2021 *
+ *                                                            		    *
+ * 	Class Name: CardArrayAdapter.java		    						*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *  Due Date: 18 February 2021							    			*
+ *   																	*
+ *  Purpose: This class is used to populate recyclerViews with card     *
+ *  objects in an array                                                 *
+ *																		*
+ * *********************************************************************/
+
 package edu.csi.niu.z1818828.blackjack;
 
 import android.content.Context;

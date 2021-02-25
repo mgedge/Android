@@ -1,3 +1,17 @@
+/************************************************************************
+ *                                                                      *
+ * CSCI 428       			  Assignment 2               		 SP2021 *
+ *                                                            		    *
+ * 	Class Name: SettingsActivity.java	    							*
+ * 																		*
+ *  Developer: Matthew Gedge											*
+ *  Due Date: 18 February 2021							    			*
+ *   																	*
+ *  Purpose: This generated activity handles the settings activity for  *
+ *  user preferences. Here the user can change the settings of the game.*
+ *																		*
+ * *********************************************************************/
+
 package edu.csi.niu.z1818828.blackjack;
 
 import android.os.Bundle;

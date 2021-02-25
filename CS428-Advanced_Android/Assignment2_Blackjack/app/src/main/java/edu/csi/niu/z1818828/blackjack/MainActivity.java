@@ -5,9 +5,12 @@
  * 	Class Name: MainActivity.java		    							*
  * 																		*
  *  Developer: Matthew Gedge											*
- *   Due Date: 18 February 2021							    			*
+ *  Due Date: 18 February 2021							    			*
  *   																	*
- *    Purpose: This activity the game through the logic and UI          *
+ *  Purpose: This activity manages the interaction of the game's UI.    *
+ *  When an element of the UI is interacted with, this class will       *
+ *  update corresponding UI elements and update game logic values via   *
+ *  the Game class, which contains game logic methods.                  *
  *																		*
  * *********************************************************************/
 package edu.csi.niu.z1818828.blackjack;
@@ -33,10 +36,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     //UI Elements
@@ -70,27 +69,25 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView playerList;
     ConstraintLayout screen;
 
+    //Create game instance
+    Game game = new Game();
+
     //Simple data types
     int gameStatus = 0; //-1 - out of money, 0 - not active, 1 - active game, 2 - win/lose scenario
-    int counter = 0;
-    int talonStack = 0;
-    int playerScore;
-    int dealerScore;
-    int hiddenCard;
-    int playerCash = 1000;
-    int playerBet = 0;
     boolean bAllowBets = true;
     boolean firstTurn = true;
+
+    //Constants
+    static final int blueChipValue = 1;
+    static final int greenChipValue = 10;
+    static final int redChipValue = 100;
+    static final int blackChipValue = 1000;
 
     //Game settings
     boolean bAllowSurrender;
     boolean bAllowDouble;
-    int numDecks;
 
     //Complex data types
-    Card[] cards;
-    List<Card> playerStack = new ArrayList<>();
-    List<Card> dealerStack = new ArrayList<>();
     CardArrayAdapter playerAdapter;
     CardArrayAdapter dealerAdapter;
 
@@ -139,8 +136,11 @@ public class MainActivity extends AppCompatActivity {
         //Get game settings
         getGameSettings();
 
+        //Set the game status
+        imageViewGameStatus.setVisibility(View.GONE);
+
         //Set bets
-        updateCash();
+        updateUICash();
 
         //Get the recyclerViews
         playerList = findViewById(R.id.listViewPlayer);
@@ -157,10 +157,8 @@ public class MainActivity extends AppCompatActivity {
         dealerList.addItemDecoration(decoration);
 
         //Create the adapters for the listViews
-        playerAdapter = new CardArrayAdapter(this, playerStack);
-        dealerAdapter = new CardArrayAdapter(this, dealerStack);
-
-        //loadData();
+        playerAdapter = new CardArrayAdapter(this, game.playerStack);
+        dealerAdapter = new CardArrayAdapter(this, game.dealerStack);
 
         //Set the adapters for the listViews
         playerList.setAdapter(playerAdapter);
@@ -175,18 +173,18 @@ public class MainActivity extends AppCompatActivity {
         //Change visibility of extra game buttons
         switchSettingButtonsViews();
 
-        //Create the deck of cards
-        cards = new Card[52 * numDecks];
-        cards = initialize(cards, numDecks);
-        cards = shuffleDeck(cards, numDecks);
-
-
         //Look for when the screen is touched
         screen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (gameStatus == 2) {
-                    newRound();
+                    game.newRound();
+
+                    //Update the cash balance
+                    updateUICash();
+
+                    //Allow bets again
+                    bAllowBets = true;
                 }
             }
         });
@@ -196,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (gameStatus == 2)
-                    newRound();
+                    game.newRound();
 
                 //Get the game settings
                 getGameSettings();
@@ -210,35 +208,22 @@ public class MainActivity extends AppCompatActivity {
                 //Show extra buttons
                 switchSettingButtonsViews();
 
-                //Deal two cards to the player
-                playerStack.add(cards[talonStack]);
-                playerScore += evaluateCardScore(playerScore, cards[talonStack].rank);
-                talonStack++;
-
-                playerStack.add(cards[talonStack]);
-                playerScore += evaluateCardScore(playerScore, cards[talonStack].rank);
-                talonStack++;
-
-                //Deal two cards to the dealer, but keep one hidden
-                dealerStack.add(null);
-                hiddenCard = talonStack;
-                talonStack++;
-
-                dealerStack.add(cards[talonStack]);
-                dealerScore += evaluateCardScore(dealerScore, cards[talonStack].rank);
-                talonStack++;
+                //Deal the cards
+                game.dealPlayer();
+                game.dealHouse();
 
                 //Update the UI
                 playerAdapter.notifyDataSetChanged();
                 dealerAdapter.notifyDataSetChanged();
-                updateGameScore();
+                updateUIGameScore();
             }
         });
 
         buttonNewRound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newRound();
+                game.newRound();
+                newRoundUI();
             }
         });
 
@@ -257,51 +242,22 @@ public class MainActivity extends AppCompatActivity {
                     //Disable extra buttons
                     switchSettingButtonsViews();
 
-                    //Add the new card to the players deck
-                    playerStack.add(cards[talonStack]);
+                    //Hit the player
+                    setUIGameStatus(game.hit());
+
+                    //Update the cards
                     playerAdapter.notifyDataSetChanged();
 
-                    //Increment the score based on the new card
-                    playerScore += evaluateCardScore(playerScore, cards[talonStack].rank);
+                    //Update the score
+                    updateUIGameScore();
 
-                    //Increment the counter for the un-played deck
-                    talonStack++;
+                    //Update the cash
+                    updateUICash();
 
-                    //Update score UI elements
-                    updateGameScore();
-
-                    //If the player gets a score above 21, the game is over
-                    if (playerScore > 21) {
-                        dealerTurn();
-
-                        if (playerCash <= 0) {
-                            restartGame();
-                        } else {
-                            setUIGameStatus(-1);
-                            switchUIGameStatusView();
-                        }
-                    }
-                    //If the player hit blackjack, the dealer takes the turn.
-                    else if (playerScore == 21) {
-                        dealerTurn();
-
-                        //Tie
-                        if (dealerScore == 21) {
-                            setUIGameStatus(0);
-                            playerCash += playerBet;
-                            updateCash();
-                        }
-                        //Win
-                        else {
-                            setUIGameStatus(1);
-                            playerCash += (playerBet * 2);
-                            updateCash();
-                        }
-
-                        switchUIGameStatusView();
-                    }
+                    //Update the views
+                    switchUIGameStatusView();
                 } else {
-                    newRound();
+                    game.newRound();
                 }
             }
         });
@@ -318,12 +274,24 @@ public class MainActivity extends AppCompatActivity {
                     switchSettingButtonsViews();
 
                     //Play dealer
-                    dealerTurn();
+                    game.dealerTurn();
+
+                    //Update dealer cards
+                    dealerAdapter.notifyDataSetChanged();
+
+                    //Update the score
+                    updateUIGameScore();
 
                     //Determine the winner
-                    evaluateWinner();
+                    setUIGameStatus(game.evaluateWinner());
+
+                    //Update cash
+                    updateUICash();
+
+                    //Update UI
+                    switchUIGameStatusView();
                 } else {
-                    newRound();
+                    game.newRound();
                 }
             }
         });
@@ -339,14 +307,9 @@ public class MainActivity extends AppCompatActivity {
                         //Show extra buttons
                         switchSettingButtonsViews();
 
-                        //Give the player back half their bet
-                        playerCash += ((int) (playerBet / 2));
+                        //Surrender the player
+                        game.surrender();
 
-                        //Play dealer's turn
-                        dealerTurn();
-
-                        //End the game and change the views
-                        restartGame();
                         setUIGameStatus(-1);
                         switchUIGameStatusView();
                     }
@@ -360,31 +323,30 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (firstTurn) {
                         //Make sure player has more cash than the bet
-                        if (playerCash >= playerBet) {
+                        if (game.playerCash >= game.playerBet) {
                             //End the first turn status
                             firstTurn = false;
 
                             //Show extra buttons
                             switchSettingButtonsViews();
 
-                            //Double the bet, decrement another bet from cash
-                            playerCash -= playerBet;
-                            playerBet = playerBet * 2;
-
-                            //Deal the card to the player
-                            playerStack.add(cards[talonStack]);
-                            playerScore = evaluateDeckScore(playerStack);
-                            talonStack++;
+                            //Double the player's bet
+                            game.doubleDown();
 
                             //Update the view
                             playerAdapter.notifyDataSetChanged();
-                            updateGameScore();
+                            updateUIGameScore();
 
                             //Play dealer's turn
-                            dealerTurn();
+                            game.dealerTurn();
+                            dealerAdapter.notifyDataSetChanged();
+                            updateUIGameScore();
 
                             //Evaluate the winner of the game
-                            evaluateWinner();
+                            setUIGameStatus(game.evaluateWinner());
+
+                            updateUICash();
+                            switchUIGameStatusView();
                         }
                     }
                 }
@@ -394,9 +356,9 @@ public class MainActivity extends AppCompatActivity {
         buttonAddMoney.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newRound();
-                playerCash = 1000;
-                updateCash();
+                game.newRound();
+                game.playerCash = 1000;
+                updateUICash();
             }
         });
 
@@ -404,10 +366,9 @@ public class MainActivity extends AppCompatActivity {
         blueChip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((playerCash >= 1) && (bAllowBets)) {
-                    playerCash--;
-                    playerBet++;
-                    updateCash();
+                if (bAllowBets) {
+                    game.addBet(blueChipValue);
+                    updateUICash();
                 }
             }
         });
@@ -415,10 +376,9 @@ public class MainActivity extends AppCompatActivity {
         greenChip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((playerCash >= 10) && (bAllowBets)) {
-                    playerCash -= 10;
-                    playerBet += 10;
-                    updateCash();
+                if (bAllowBets) {
+                    game.addBet(greenChipValue);
+                    updateUICash();
                 }
             }
         });
@@ -426,10 +386,9 @@ public class MainActivity extends AppCompatActivity {
         redChip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((playerCash >= 100) && (bAllowBets)) {
-                    playerCash -= 100;
-                    playerBet += 100;
-                    updateCash();
+                if (bAllowBets) {
+                    game.addBet(redChipValue);
+                    updateUICash();
                 }
             }
         });
@@ -437,10 +396,9 @@ public class MainActivity extends AppCompatActivity {
         blackChip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((playerCash >= 1000) && (bAllowBets)) {
-                    playerCash -= 1000;
-                    playerBet += 1000;
-                    updateCash();
+                if (bAllowBets) {
+                    game.addBet(blackChipValue);
+                    updateUICash();
                 }
             }
         });
@@ -476,18 +434,33 @@ public class MainActivity extends AppCompatActivity {
         loadData();
 
         //Give money if ended broke
-        if ((playerCash == 0) && (gameStatus == 0)) {
-            playerCash = 1000;
+        if ((game.playerCash == 0) && (gameStatus == 0)) {
+            game.playerCash = 1000;
         }
 
         //Start new round
-        newRound();
+        game.newRound();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         saveData();
+    }
+
+    /**
+     * This function simply updates the variables from settings
+     */
+    public void getGameSettings() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        bAllowDouble = prefs.getBoolean("double_down", false);
+        bAllowSurrender = prefs.getBoolean("surrender", false);
+
+        try {
+            game.numDecks = Integer.parseInt(prefs.getString("numDecks", "1"));
+        } catch (Exception e) {
+            game.numDecks = 1;
+        }
     }
 
     /**
@@ -499,10 +472,10 @@ public class MainActivity extends AppCompatActivity {
 
         //If the game hasn't started yet, "refund" the player
         if (gameStatus == 0)
-            playerCash += playerBet;
+            game.playerCash += game.playerBet;
 
         //Save the cash
-        editor.putInt("cash", playerCash);
+        editor.putInt("cash", game.playerCash);
         editor.apply();
     }
 
@@ -511,8 +484,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("SharedPref", MODE_PRIVATE);
-        playerCash = sharedPreferences.getInt("cash", 1000);
-        updateCash();
+        game.playerCash = sharedPreferences.getInt("cash", 1000);
+        updateUICash();
     }
 
     /**
@@ -621,7 +594,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method sets the visibility of the win/lose scenario image depending on game status
      *
-     * @param status an integer for lose (-1), tie (0), and win(1) of the player
+     * @param status an integer for lose (-1), tie (0), and win(1) of the player, do nothing otherwise
      */
     public void setUIGameStatus(int status) {
         //Player lost
@@ -637,7 +610,7 @@ public class MainActivity extends AppCompatActivity {
             imageViewGameStatus.setVisibility(View.VISIBLE);
         }
         //Player win
-        else {
+        else if (status == 1) {
             gameStatus = 2;
             imageViewGameStatus.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.win, null));
             imageViewGameStatus.setVisibility(View.VISIBLE);
@@ -645,124 +618,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * This function simply updates the variables from settings
-     */
-    public void getGameSettings() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        bAllowDouble = prefs.getBoolean("double_down", false);
-        bAllowSurrender = prefs.getBoolean("surrender", false);
-        try {
-            numDecks = Integer.parseInt(prefs.getString("numDecks", "1"));
-        } catch (Exception e) {
-            numDecks = 1;
-        }
-    }
-
-    /**
-     * This method iterates through the deck of cards and sets its values to its rank and suit
-     *
-     * @param deck the deck of null cards to initialize
-     * @return the deck of cards with all 4 suits and 13 ranks
-     */
-    public Card[] initialize(Card[] deck, int decks) {
-        counter = 0;
-
-        //Initialize the deck
-        for (int i = 0; i < decks; i++) {
-            for (int suit = 0; suit < 4; suit++) {
-                for (int rank = 0; rank < 13; rank++) {
-                    cards[counter] = new Card(suit, rank, resolvePNG(suit, rank));
-                    counter++;
-                }
-            }
-        }
-
-        return deck;
-    }
-
-    /**
-     * This method determines the name of the card as a char/int pair
-     *
-     * @param suit the integer value of the suit
-     * @param rank the integer value of the rank
-     * @return a string for the suit/rank pair (i.e. "12c" which is queen of clubs)
-     */
-    public String resolvePNG(int suit, int rank) {
-        String cardName = null;
-        String sut = null;
-        int rnk = 1;
-
-        //Search through each suit and rank
-        for (int s = 0; s < 4; s++) {
-            for (int r = 0; r < 13; r++) {
-                //When the rank and suit are found, set the corresponding variables
-                if ((suit == s) && (rank == r)) {
-                    switch (s) {
-                        case 0:
-                            sut = "c";
-                            break;
-                        case 1:
-                            sut = "d";
-                            break;
-                        case 2:
-                            sut = "h";
-                            break;
-                        case 3:
-                            sut = "s";
-                            break;
-                    }
-
-                    rnk = r + 1;
-                }
-            }
-        }
-
-        //Assuming the suit is not empty, set it to the int, char pair
-        if (sut != null)
-            cardName = rnk + sut;
-
-        //Return the final char/int string pair
-        return cardName;
-    }
-
-    /**
-     * This method "shuffles" the deck by iterating through each element of the Card array then randomly
-     * selects the replacement position to swap it to.
-     *
-     * @param deck the initialized deck to shuffle
-     * @return the shuffled deck
-     */
-    public Card[] shuffleDeck(Card[] deck, int decks) {
-        Random rnd = new Random();
-        Card temp;
-
-        int numCards = 52 * decks;
-
-        if (decks < 1)
-            numCards = 52;
-
-        //Iterate through the deck
-        for (int i = 0; i < numCards; i++) {
-            //Get a random index
-            int random = rnd.nextInt(52);
-
-            //Swap the current card with the random index
-            temp = deck[random];
-            deck[random] = deck[i];
-            deck[i] = temp;
-        }
-
-        //Return the shuffled deck
-        return deck;
-    }
-
-    /**
      * This method sets the UI scores to their corresponding integer values
      */
-    public void updateGameScore() {
+    public void updateUIGameScore() {
         try {
-            textViewDealerScore.setText(String.valueOf(dealerScore));
-            textViewPlayerScore.setText(String.valueOf(playerScore));
+            textViewDealerScore.setText(String.valueOf(game.dealerScore));
+            textViewPlayerScore.setText(String.valueOf(game.playerScore));
         } catch (Exception e) {
             System.out.println("Failed to update game score - " + e);
         }
@@ -771,219 +632,27 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method sets the UI cash and bet values to their corresponding integer values
      */
-    public void updateCash() {
+    public void updateUICash() {
         try {
-            textViewCash.setText("$" + String.valueOf(playerCash));
-            textViewBet.setText("$" + String.valueOf(playerBet));
+            textViewCash.setText("$" + String.valueOf(game.playerCash));
+            textViewBet.setText("$" + String.valueOf(game.playerBet));
         } catch (Exception e) {
             System.out.println("Failed to update game score - " + e);
         }
     }
 
     /**
-     * This method evaluates the score of the card
-     *
-     * @param score the integer value of the players score
-     * @param rank  the integer value for the rank of the card
-     * @return integer value of the card's score
+     * This method resets the UI for a new round
      */
-    public int evaluateCardScore(int score, int rank) {
-        //If the card is an ace
-        if (rank == 0) {
-            //If the score is 11 or greater, 11 value is bad
-            if (score > 10)
-                return 1;
-                //if the score is 10 or less, 11 will raise score close to 21
-            else
-                return 11;
-        }
-        //Card is a court it is worth 10
-        else if (rank > 9)
-            return 10;
-            //Any other card is worth its rank+1
-        else
-            return rank + 1;
-    }
-
-    /**
-     * This method iterates through the deck param and evaluates the deck's total value
-     *
-     * @param deck the List of cards to evaluate
-     * @return the integer value of the deck
-     */
-    public int evaluateDeckScore(List<Card> deck) {
-        int score = 0;
-        int currentCard;
-        List<Integer> aces = new ArrayList<>();
-
-        //Iterate through the deck
-        for (int i = 0; i < deck.size(); i++) {
-            currentCard = deck.get(i).rank;
-
-            //If the card is an ace, add it to a temp list
-            if (currentCard == 0) {
-                aces.add(1);
-            } else if (currentCard > 9)
-                score += 10;
-            else {
-                score += (currentCard + 1);
-            }
-        }
-
-        //Re-evaluate the aces
-        if (aces.size() > 0) {
-            //If there's more than one, you cannot get blackjack
-            if (aces.size() > 1) {
-                score += aces.size();
-            } else {
-                if (score > 10)
-                    score++;
-                else
-                    score += 11;
-            }
-        }
-
-        //Return final score
-        return score;
-    }
-
-    /**
-     * This method will compare the scores of the dealer and the player. UI views and game status
-     * will be updated. Bets and player cash will be managed.
-     */
-    public void evaluateWinner() {
-        int winner = -1; //-1 house, 0 tie, 1 player
-        boolean playerBlackjack = false;
-
-        //Player got winnable score
-        if (playerScore <= 21) {
-
-            //Dealer got a winnable score
-            if (dealerScore <= 21) {
-
-                //Dealer got blackjack
-                if (dealerScore == 21) {
-                    //Player also got blackjack, tie
-                    if (playerScore == 21) {
-                        winner = 0;
-                    }
-                    //Player did not have blackjack, loses
-                    else {
-                        winner = -1;
-                    }
-                }
-                //Player got blackjack, but dealer did not
-                else if (playerScore == 21) {
-                    playerBlackjack = true;
-                    winner = 1;
-                }
-                //Tie
-                else if (dealerScore == playerScore) {
-                    winner = 0;
-                }
-                //Player scored higher than dealer, but did not get blackjack
-                else if (playerScore > dealerScore) {
-                    winner = 1;
-                }
-            }
-            //Dealer went over 21
-            else {
-                //If player got blackjack
-                if (playerScore == 21) {
-                    playerBlackjack = true;
-                }
-
-                winner = 1;
-            }
-        }
-
-        //House won
-        if (winner == -1) {
-            if (playerCash <= 0)
-                restartGame();
-            else
-                setUIGameStatus(-1);
-        }
-        //Tie
-        else if (winner == 0) {
-            playerCash += playerBet;
-            updateCash();
-            setUIGameStatus(0);
-        }
-        //Player won
-        else {
-            if (playerBlackjack) {
-                //Player won, give back original bet AND blackjack earnings
-                playerCash += (playerBet + (playerBet * 1.5));
-            } else {
-                //Player won, give back bet AND earnings
-                playerCash += (playerBet + playerBet);
-            }
-
-            updateCash();
-            setUIGameStatus(1);
-        }
-
-        switchUIGameStatusView();
-    }
-
-    /**
-     * This method handles the logic for the dealer.
-     * First, the hidden card is uncovered.
-     * Next, the dealer will hit until dealers score is more than player's, hits blackjack, or the dealer busts
-     */
-    public void dealerTurn() {
-        //Uncover hidden card
-        dealerStack.set(0, cards[hiddenCard]);
-        dealerScore += evaluateCardScore(dealerScore, cards[hiddenCard].rank);
-        dealerAdapter.notifyDataSetChanged();
-        updateGameScore();
-
-        //Deal cards until dealer blackjack, bust, or score is greater than players
-        while ((dealerScore < playerScore) && (dealerScore < 17) && (playerScore <= 21)) {
-            //Add a new card to the dealer deck
-            dealerStack.add(cards[talonStack]);
-            dealerAdapter.notifyDataSetChanged();
-
-            //Increment the score based on the new card
-            dealerScore = evaluateDeckScore(dealerStack);
-            updateGameScore();
-
-            //Increment the counter for the talon deck
-            talonStack++;
-        }
-
-    }
-
-    /**
-     * This method simply resets all game variables to their starting values
-     */
-    public void newRound() {
-        //Reset the score
-        dealerScore = 0;
-        playerScore = 0;
-
-        //Take the player's losses
-        playerBet = 0;
-
-        //Update the cash balance
-        updateCash();
-
-        //Allow bets again
-        bAllowBets = true;
-
-        //Clear the decks
-        dealerStack.clear();
-        playerStack.clear();
-
-        //Clear the talon
-        cards = null;
-
+    public void newRoundUI() {
         //Reset the gameStatus code
         gameStatus = 0;
 
-        //reset the talon counter
-        talonStack = 0;
+        //Update the cash balance
+        updateUICash();
+
+        //Allow bets again
+        bAllowBets = true;
 
         //Reset UI elements to 'inactive'
         switchUIGameStatusView();
@@ -992,30 +661,6 @@ public class MainActivity extends AppCompatActivity {
         //Clear the recycler views
         playerAdapter.notifyDataSetChanged();
         dealerAdapter.notifyDataSetChanged();
-
-        //Create a new deck and shuffle for next game
-        cards = new Card[52 * numDecks];
-        cards = initialize(cards, numDecks);
-        cards = shuffleDeck(cards, numDecks);
-    }
-
-    public void restartGame() {
-        if (playerCash <= 0) {
-            //Clear the decks
-            dealerStack.clear();
-            playerStack.clear();
-
-            //Clear the talon
-            cards = null;
-
-            //Clear the recycler views
-            playerAdapter.notifyDataSetChanged();
-            dealerAdapter.notifyDataSetChanged();
-
-            //Change the game status to new game UI
-            gameStatus = -1;
-            switchUIGameStatusView();
-        }
     }
 
     /**
