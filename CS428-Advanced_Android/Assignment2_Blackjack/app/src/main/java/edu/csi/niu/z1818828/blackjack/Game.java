@@ -332,7 +332,7 @@ public class Game {
      * This method adds a card to the players deck and returns a status code if the hit results
      * in a win/lose scenario
      *
-     * @return an integer code for the
+     * @return an integer code for the game status
      */
     public int hit() {
         //Add the new card to the players deck
@@ -348,8 +348,10 @@ public class Game {
         if (playerScore > 21) {
             dealerTurn();
 
+
             if (playerCash <= 0) {
                 restartGame();
+                return -1;
             } else {
                 return -1;
             }

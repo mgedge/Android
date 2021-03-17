@@ -15,6 +15,8 @@
  * *********************************************************************/
 package edu.csi.niu.z1818828.blackjack;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -254,6 +256,10 @@ public class MainActivity extends AppCompatActivity {
                     //Update the cash
                     updateUICash();
 
+                    //Retrieve new cash
+                    if (game.playerCash <= 0)
+                        gameStatus = -1;
+
                     //Update the views
                     switchUIGameStatusView();
                 } else {
@@ -359,6 +365,10 @@ public class MainActivity extends AppCompatActivity {
                 game.newRound();
                 game.playerCash = 1000;
                 updateUICash();
+                gameStatus = 0;
+
+                updateUIGameScore();
+                newRoundUI();
             }
         });
 
@@ -413,6 +423,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_help:
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(R.string.blackjack_rules)
+                        .setMessage(R.string.blackjack_rules_description)
+                        .setCancelable(false)
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                return;
+                            }
+                        }).show();
+                return true;
             case R.id.menu_save:
                 saveData();
                 Toast.makeText(this, "Game saved!", Toast.LENGTH_SHORT).show();
@@ -494,6 +516,8 @@ public class MainActivity extends AppCompatActivity {
     public void switchUIGameStatusView() {
         //Game in play
         if (gameStatus == 1) {
+            dealerList.setVisibility(View.VISIBLE);
+            playerList.setVisibility(View.VISIBLE);
             textViewNoMoney.setVisibility(View.INVISIBLE);
             buttonAddMoney.setVisibility(View.INVISIBLE);
             buttonHit.setVisibility(View.VISIBLE);
@@ -505,9 +529,23 @@ public class MainActivity extends AppCompatActivity {
             textViewDealerLabel.setVisibility(View.VISIBLE);
             textViewPlayerScore.setVisibility(View.VISIBLE);
             textViewDealerScore.setVisibility(View.VISIBLE);
+            blueChip.setVisibility(View.GONE);
+            greenChip.setVisibility(View.GONE);
+            redChip.setVisibility(View.GONE);
+            blackChip.setVisibility(View.GONE);
+            textViewBlueChip.setVisibility(View.GONE);
+            textViewGreenChip.setVisibility(View.GONE);
+            textViewRedChip.setVisibility(View.GONE);
+            textViewBlackChip.setVisibility(View.GONE);
         }
         //Lose/Win active
         else if (gameStatus == 2) {
+            dealerList.setVisibility(View.INVISIBLE);
+            playerList.setVisibility(View.INVISIBLE);
+            textViewPlayerLabel.setVisibility(View.INVISIBLE);
+            textViewDealerLabel.setVisibility(View.INVISIBLE);
+            textViewPlayerScore.setVisibility(View.INVISIBLE);
+            textViewDealerScore.setVisibility(View.INVISIBLE);
             textViewNoMoney.setVisibility(View.INVISIBLE);
             buttonAddMoney.setVisibility(View.INVISIBLE);
             buttonHit.setVisibility(View.INVISIBLE);
@@ -516,6 +554,8 @@ public class MainActivity extends AppCompatActivity {
         }
         //Out of money
         else if (gameStatus == -1) {
+            dealerList.setVisibility(View.INVISIBLE);
+            playerList.setVisibility(View.INVISIBLE);
             textViewNoMoney.setVisibility(View.VISIBLE);
             buttonAddMoney.setVisibility(View.VISIBLE);
             buttonHit.setVisibility(View.INVISIBLE);
@@ -542,6 +582,8 @@ public class MainActivity extends AppCompatActivity {
         }
         //No game active
         else {
+            dealerList.setVisibility(View.INVISIBLE);
+            playerList.setVisibility(View.INVISIBLE);
             textViewNoMoney.setVisibility(View.INVISIBLE);
             buttonAddMoney.setVisibility(View.INVISIBLE);
             buttonHit.setVisibility(View.INVISIBLE);
@@ -599,7 +641,10 @@ public class MainActivity extends AppCompatActivity {
     public void setUIGameStatus(int status) {
         //Player lost
         if (status == -1) {
-            gameStatus = 2;
+            if (game.playerCash <= 0)
+                gameStatus = -1;
+            else
+                gameStatus = 2;
             imageViewGameStatus.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.lose, null));
             imageViewGameStatus.setVisibility(View.VISIBLE);
         }

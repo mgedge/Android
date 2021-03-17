@@ -15,10 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#A31111"
-        app:menu="@menu/menu_options"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_options"
         app:title="Blackjack"
         app:titleTextColor="@color/white" />
 
@@ -27,7 +27,7 @@
         android:id="@+id/textViewDealerScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="21"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -40,14 +40,14 @@
         android:id="@+id/textViewPlayerScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="270dp"
+        android:layout_marginTop="8dp"
         android:text="21"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRedChip" />
 
     <TextView
         android:id="@+id/textViewDealer"
@@ -79,15 +79,13 @@
         android:id="@+id/textViewBet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="Bet"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewPlayer"
         app:layout_constraintEnd_toStartOf="@+id/textViewBetAmount"
-        app:layout_constraintStart_toStartOf="@+id/textViewPlayer"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCash"
-        app:layout_constraintVertical_bias="0.53" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCash" />
 
     <TextView
         android:id="@+id/textViewBetAmount"
@@ -129,23 +127,25 @@
         android:id="@+id/buttonHit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
         android:layout_marginBottom="40dp"
         android:text="HIT"
         app:backgroundTint="#43A047"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonStand"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonStand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
         android:layout_marginBottom="40dp"
         android:text="STAND"
         app:backgroundTint="#FDD835"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonHit" />
 
     <ImageView
         android:id="@+id/imageViewGameStatus"
@@ -195,18 +195,16 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listViewPlayer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="154dp"
         android:isScrollContainer="true"
         android:layoutAnimation="@anim/layout_animation"
         android:layoutDirection="ltr"
         android:nestedScrollingEnabled="true"
         android:orientation="horizontal"
         android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPlayerScore" />
@@ -216,7 +214,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/chip_blue"
         android:focusable="false"
         android:foreground="@drawable/chip_blue"
@@ -229,14 +227,11 @@
         android:layout_height="75dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/chip_black"
         android:focusable="false"
         android:foreground="@drawable/chip_black"
-        app:layout_constraintBottom_toTopOf="@+id/listViewPlayer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBlueChip"
-        app:layout_constraintVertical_bias="0.22000003" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonBlueChip" />
 
     <Button
         android:id="@+id/buttonRedChip"
@@ -244,21 +239,18 @@
         android:layout_height="75dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/chip_red"
         android:focusable="false"
         android:foreground="@drawable/chip_red"
-        app:layout_constraintBottom_toTopOf="@+id/textViewPlayerScore"
         app:layout_constraintStart_toEndOf="@+id/buttonBlackChip"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGreenChip"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonGreenChip" />
 
     <Button
         android:id="@+id/buttonGreenChip"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/chip_green"
         android:focusable="false"
         android:foreground="@drawable/chip_green"
@@ -322,8 +314,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
-        android:text="New Round"
         android:elevation="200dp"
+        android:text="New Round"
         app:backgroundTint="#E53935"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -347,20 +339,21 @@
         android:id="@+id/textViewNoMoney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="You ran out of money!"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewGameStatus" />
 
     <Button
         android:id="@+id/buttonAddMoney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="(Add another $1000)"
         app:layout_constraintEnd_toEndOf="@+id/textViewNoMoney"
         app:layout_constraintStart_toStartOf="@+id/textViewNoMoney"
@@ -370,25 +363,23 @@
         android:id="@+id/buttonDoubledown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="32dp"
         android:layout_marginBottom="8dp"
         android:text="Double down"
         app:backgroundTint="#FFB300"
         app:layout_constraintBottom_toTopOf="@+id/buttonHit"
-        app:layout_constraintEnd_toEndOf="@+id/buttonHit"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonSurrender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         android:text="Surrender"
         app:backgroundTint="#515151"
         app:layout_constraintBottom_toTopOf="@+id/buttonStand"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/buttonStand" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
